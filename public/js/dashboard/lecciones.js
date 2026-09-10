@@ -366,17 +366,258 @@ let reconocimientoVozIniciado =
 let reconocimientoVozDebeDetenerse =
     false;
 
-let reconocimientoVozTuvoResultado =
-    false;
-
 let reconocimientoVozTuvoError =
     false;
+
+let reconocimientoVozProcesado =
+    false;
+
+let textoReconocidoTemporal =
+    "";
 
 let botonVozActual =
     null;
 
-let temporizadorFinReconocimiento =
+let temporizadorDetenerVoz =
     null;
+
+let temporizadorSeguridadVoz =
+    null;
+
+
+/* =========================================================
+   LIMPIAR TEMPORIZADORES
+   ========================================================= */
+
+function limpiarTemporizadoresVoz() {
+
+    clearTimeout(
+        temporizadorDetenerVoz
+    );
+
+
+    clearTimeout(
+        temporizadorSeguridadVoz
+    );
+
+
+    temporizadorDetenerVoz =
+        null;
+
+
+    temporizadorSeguridadVoz =
+        null;
+}
+
+
+/* =========================================================
+   PROCESAR EL TEXTO QUE ALCANZAMOS A ESCUCHAR
+   ========================================================= */
+
+function procesarTextoReconocidoVoz() {
+
+    if (
+        reconocimientoVozProcesado
+    ) {
+
+        return true;
+    }
+
+
+    const texto =
+        textoReconocidoTemporal
+            .trim()
+            .toLowerCase();
+
+
+    if (!texto) {
+
+        return false;
+    }
+
+
+    reconocimientoVozProcesado =
+        true;
+
+
+    evaluarPronunciacionLeccion(
+        texto
+    );
+
+
+    return true;
+}
+
+
+/* =========================================================
+   RESTAURAR BOTÓN
+   ========================================================= */
+
+function restaurarBotonVoz() {
+
+    if (!botonVozActual) {
+
+        return;
+    }
+
+
+    botonVozActual.classList.remove(
+        "grabando",
+        "analizando"
+    );
+
+
+    botonVozActual.textContent =
+        "🎙️ Mantén presionado para hablar";
+}
+
+
+/* =========================================================
+   PROGRAMAR DETENCIÓN
+
+   Dejamos unos milisegundos al navegador para terminar
+   de convertir la última parte de la voz en texto.
+   ========================================================= */
+
+function programarDetencionReconocimientoVoz() {
+
+    if (
+        !reconocimientoVozLeccion ||
+        !reconocimientoVozActivo ||
+        !reconocimientoVozIniciado
+    ) {
+
+        return;
+    }
+
+
+    clearTimeout(
+        temporizadorDetenerVoz
+    );
+
+
+    temporizadorDetenerVoz =
+        setTimeout(
+            () => {
+
+                if (
+                    !reconocimientoVozLeccion ||
+                    !reconocimientoVozActivo
+                ) {
+
+                    return;
+                }
+
+
+                try {
+
+                    /*
+                    stop() intenta generar el resultado
+                    con lo que ya escuchó.
+                    */
+
+                    reconocimientoVozLeccion.stop();
+
+                } catch (error) {
+
+                    console.warn(
+                        "No se pudo detener el reconocimiento:",
+                        error
+                    );
+                }
+
+
+                /* =========================================
+                   PROTECCIÓN CONTRA RECONOCIMIENTO COLGADO
+                   ========================================= */
+
+                clearTimeout(
+                    temporizadorSeguridadVoz
+                );
+
+
+                temporizadorSeguridadVoz =
+                    setTimeout(
+                        () => {
+
+                            if (
+                                !reconocimientoVozLeccion ||
+                                !reconocimientoVozActivo
+                            ) {
+
+                                return;
+                            }
+
+
+                            /*
+                            Si tenemos aunque sea un resultado
+                            provisional, lo utilizamos antes
+                            de abortar.
+                            */
+
+                            const procesado =
+                                procesarTextoReconocidoVoz();
+
+
+                            if (!procesado) {
+
+                                reconocimientoVozTuvoError =
+                                    true;
+
+
+                                const resultado =
+                                    document.getElementById(
+                                        "resultadoPronunciacion"
+                                    );
+
+
+                                if (resultado) {
+
+                                    resultado.innerHTML = `
+
+                                        <div class="mensaje-voz-error">
+
+                                            <strong>
+                                                🎙️ No pude procesar tu voz
+                                            </strong>
+
+                                            <p>
+                                                Intenta hablar un poco
+                                                más cerca del micrófono.
+                                            </p>
+
+                                        </div>
+                                    `;
+                                }
+                            }
+
+
+                            try {
+
+                                /*
+                                Solo lo usamos como último recurso.
+                                */
+
+                                reconocimientoVozLeccion.abort();
+
+                            } catch (error) {
+
+                                console.warn(
+                                    "No se pudo finalizar el reconocimiento:",
+                                    error
+                                );
+                            }
+
+                        },
+
+                        4000
+                    );
+
+            },
+
+            300
+        );
+}
 
 
 /* =========================================================
@@ -388,11 +629,9 @@ function iniciarReconocimientoVozLeccion(
     evento
 ) {
 
-    /* =====================================================
-       EVITAR DOS RECONOCIMIENTOS AL MISMO TIEMPO
-       ===================================================== */
-
-    if (reconocimientoVozActivo) {
+    if (
+        reconocimientoVozActivo
+    ) {
 
         return;
     }
@@ -427,9 +666,8 @@ function iniciarReconocimientoVozLeccion(
                     </strong>
 
                     <p>
-                        Tu navegador no permite
-                        reconocimiento de voz.
-                        Prueba con Chrome o Edge.
+                        Usa Chrome o Edge para
+                        practicar la pronunciación.
                     </p>
 
                 </div>
@@ -441,11 +679,11 @@ function iniciarReconocimientoVozLeccion(
     }
 
 
-    /* =====================================================
-       CAPTURAR EL PUNTERO
+    limpiarTemporizadoresVoz();
 
-       Así, aunque el dedo/mouse se mueva un poco fuera
-       del botón, detectamos cuando el usuario lo suelta.
+
+    /* =====================================================
+       CAPTURAR PUNTERO
        ===================================================== */
 
     if (
@@ -482,12 +720,25 @@ function iniciarReconocimientoVozLeccion(
         "es-EC";
 
 
-    reconocimientoVozLeccion.continuous =
-        false;
+    /*
+    Queremos seguir escuchando mientras
+    el usuario mantenga presionado.
+    */
 
+    reconocimientoVozLeccion.continuous =
+        true;
+
+
+    /*
+    MUY IMPORTANTE:
+
+    Ahora sí aceptamos resultados provisionales.
+    Así no perdemos lo que Chrome ya alcanzó
+    a reconocer al momento de soltar.
+    */
 
     reconocimientoVozLeccion.interimResults =
-        false;
+        true;
 
 
     reconocimientoVozLeccion.maxAlternatives =
@@ -495,7 +746,7 @@ function iniciarReconocimientoVozLeccion(
 
 
     /* =====================================================
-       ESTADO
+       REINICIAR ESTADO
        ===================================================== */
 
     reconocimientoVozActivo =
@@ -510,12 +761,16 @@ function iniciarReconocimientoVozLeccion(
         false;
 
 
-    reconocimientoVozTuvoResultado =
-        false;
-
-
     reconocimientoVozTuvoError =
         false;
+
+
+    reconocimientoVozProcesado =
+        false;
+
+
+    textoReconocidoTemporal =
+        "";
 
 
     botonVozActual =
@@ -523,7 +778,7 @@ function iniciarReconocimientoVozLeccion(
 
 
     /* =====================================================
-       VISUAL DEL BOTÓN
+       BOTÓN
        ===================================================== */
 
     if (boton) {
@@ -544,7 +799,7 @@ function iniciarReconocimientoVozLeccion(
 
 
     /* =====================================================
-       MENSAJE ESCUCHANDO
+       ESTADO VISUAL
        ===================================================== */
 
     const resultado =
@@ -564,8 +819,8 @@ function iniciarReconocimientoVozLeccion(
                 </p>
 
                 <small>
-                    Habla mientras mantienes
-                    presionado el botón.
+                    Pronuncia la frase mientras
+                    mantienes presionado.
                 </small>
 
                 <div class="ondas-audio">
@@ -583,7 +838,7 @@ function iniciarReconocimientoVozLeccion(
 
 
     /* =====================================================
-       CUANDO EL NAVEGADOR EMPIEZA REALMENTE
+       INICIO REAL DEL MICRÓFONO
        ===================================================== */
 
     reconocimientoVozLeccion.onstart =
@@ -594,68 +849,124 @@ function iniciarReconocimientoVozLeccion(
 
 
             /*
-            Puede ocurrir que el usuario suelte
-            demasiado rápido, incluso antes de que
-            SpeechRecognition termine de arrancar.
+            Si soltó antes de que Chrome
+            terminara de arrancar, aquí
+            realizamos la detención.
             */
 
             if (
                 reconocimientoVozDebeDetenerse
             ) {
 
-                try {
+                programarDetencionReconocimientoVoz();
+            }
+        };
 
-                    reconocimientoVozLeccion.stop();
 
-                } catch (error) {
+    /* =====================================================
+       RESULTADOS
+       ===================================================== */
 
-                    console.warn(
-                        "No se pudo detener el reconocimiento:",
-                        error
+    reconocimientoVozLeccion.onresult =
+        event => {
+
+            /*
+            event.results contiene tanto resultados
+            finales como provisionales.
+
+            Reconstruimos la mejor frase disponible.
+            */
+
+            let textoCompleto =
+                "";
+
+
+            for (
+                let i = 0;
+                i < event.results.length;
+                i++
+            ) {
+
+                const alternativa =
+                    event.results[i][0];
+
+
+                if (
+                    alternativa &&
+                    alternativa.transcript
+                ) {
+
+                    textoCompleto +=
+                        alternativa.transcript +
+                        " ";
+                }
+            }
+
+
+            textoCompleto =
+                textoCompleto.trim();
+
+
+            if (textoCompleto) {
+
+                textoReconocidoTemporal =
+                    textoCompleto;
+
+
+                /*
+                Esto sirve para comprobar visualmente
+                que realmente está escuchando.
+                */
+
+                const resultado =
+                    document.getElementById(
+                        "resultadoPronunciacion"
                     );
+
+
+                if (
+                    resultado &&
+                    !reconocimientoVozDebeDetenerse
+                ) {
+
+                    resultado.innerHTML = `
+
+                        <div class="escuchando-box">
+
+                            <p>
+                                🎙️ Kuntur está escuchando...
+                            </p>
+
+                            <small>
+                                Detectando tu pronunciación...
+                            </small>
+
+                            <div class="ondas-audio">
+
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                            </div>
+
+                        </div>
+                    `;
                 }
             }
         };
 
 
     /* =====================================================
-       RESULTADO
-       ===================================================== */
-
-    reconocimientoVozLeccion.onresult =
-        event => {
-
-            reconocimientoVozTuvoResultado =
-                true;
-
-
-            const textoReconocido =
-
-                event
-                    .results[0][0]
-                    .transcript
-                    .toLowerCase()
-                    .trim();
-
-
-            evaluarPronunciacionLeccion(
-                textoReconocido
-            );
-        };
-
-
-    /* =====================================================
-       ERROR
+       ERRORES
        ===================================================== */
 
     reconocimientoVozLeccion.onerror =
         event => {
 
-
             /*
-            Algunos navegadores pueden generar
-            "aborted" al finalizar manualmente.
-            No lo tratamos como error.
+            aborted lo podemos provocar nosotros
+            mediante el temporizador de seguridad.
             */
 
             if (
@@ -683,8 +994,6 @@ function iniciarReconocimientoVozLeccion(
             }
 
 
-            /* PERMISO DENEGADO */
-
             if (
                 event.error ===
                 "not-allowed"
@@ -700,8 +1009,7 @@ function iniciarReconocimientoVozLeccion(
 
                         <p>
                             Debes permitir el acceso
-                            al micrófono para practicar
-                            la pronunciación.
+                            al micrófono para continuar.
                         </p>
 
                     </div>
@@ -712,7 +1020,31 @@ function iniciarReconocimientoVozLeccion(
             }
 
 
-            /* NO ESCUCHÓ NADA */
+            if (
+                event.error ===
+                "audio-capture"
+            ) {
+
+                resultado.innerHTML = `
+
+                    <div class="mensaje-voz-error">
+
+                        <strong>
+                            🎙️ No encuentro el micrófono
+                        </strong>
+
+                        <p>
+                            Revisa que tu dispositivo
+                            tenga un micrófono disponible.
+                        </p>
+
+                    </div>
+                `;
+
+
+                return;
+            }
+
 
             if (
                 event.error ===
@@ -728,9 +1060,8 @@ function iniciarReconocimientoVozLeccion(
                         </strong>
 
                         <p>
-                            Mantén presionado el botón,
-                            pronuncia la frase y luego
-                            suéltalo.
+                            Mantén presionado,
+                            habla y luego suelta.
                         </p>
 
                     </div>
@@ -740,8 +1071,6 @@ function iniciarReconocimientoVozLeccion(
                 return;
             }
 
-
-            /* OTRO ERROR */
 
             resultado.innerHTML = `
 
@@ -761,11 +1090,60 @@ function iniciarReconocimientoVozLeccion(
 
 
     /* =====================================================
-       FINALIZACIÓN
+       FINAL DEL RECONOCIMIENTO
        ===================================================== */
 
     reconocimientoVozLeccion.onend =
         () => {
+
+            limpiarTemporizadoresVoz();
+
+
+            /*
+            Antes de decir que no escuchamos nada,
+            usamos el último resultado provisional
+            que Chrome nos haya entregado.
+            */
+
+            if (
+                !reconocimientoVozTuvoError &&
+                !reconocimientoVozProcesado
+            ) {
+
+                const procesado =
+                    procesarTextoReconocidoVoz();
+
+
+                if (!procesado) {
+
+                    const resultado =
+                        document.getElementById(
+                            "resultadoPronunciacion"
+                        );
+
+
+                    if (resultado) {
+
+                        resultado.innerHTML = `
+
+                            <div class="mensaje-voz-error">
+
+                                <strong>
+                                    No detecté una frase
+                                </strong>
+
+                                <p>
+                                    No recibí texto del
+                                    reconocimiento de voz.
+                                    Intenta nuevamente.
+                                </p>
+
+                            </div>
+                        `;
+                    }
+                }
+            }
+
 
             reconocimientoVozActivo =
                 false;
@@ -779,57 +1157,7 @@ function iniciarReconocimientoVozLeccion(
                 false;
 
 
-            /* =============================================
-               RESTAURAR BOTÓN
-               ============================================= */
-
-            if (botonVozActual) {
-
-                botonVozActual.classList.remove(
-                    "grabando",
-                    "analizando"
-                );
-
-
-                botonVozActual.textContent =
-                    "🎙️ Mantén presionado para hablar";
-            }
-
-
-            /* =============================================
-               SI NO HUBO RESULTADO NI ERROR
-               ============================================= */
-
-            if (
-                !reconocimientoVozTuvoResultado &&
-                !reconocimientoVozTuvoError
-            ) {
-
-                const resultado =
-                    document.getElementById(
-                        "resultadoPronunciacion"
-                    );
-
-
-                if (resultado) {
-
-                    resultado.innerHTML = `
-
-                        <div class="mensaje-voz-error">
-
-                            <strong>
-                                No detecté una frase
-                            </strong>
-
-                            <p>
-                                Mantén presionado un poco
-                                más mientras hablas.
-                            </p>
-
-                        </div>
-                    `;
-                }
-            }
+            restaurarBotonVoz();
 
 
             reconocimientoVozLeccion =
@@ -838,6 +1166,10 @@ function iniciarReconocimientoVozLeccion(
 
             botonVozActual =
                 null;
+
+
+            textoReconocidoTemporal =
+                "";
         };
 
 
@@ -865,17 +1197,7 @@ function iniciarReconocimientoVozLeccion(
             null;
 
 
-        if (boton) {
-
-            boton.classList.remove(
-                "grabando",
-                "analizando"
-            );
-
-
-            boton.textContent =
-                "🎙️ Mantén presionado para hablar";
-        }
+        restaurarBotonVoz();
     }
 }
 
@@ -898,11 +1220,6 @@ function detenerReconocimientoVozLeccion(
     }
 
 
-    /*
-    Evitar llamar stop() varias veces
-    por eventos repetidos.
-    */
-
     if (
         reconocimientoVozDebeDetenerse
     ) {
@@ -916,13 +1233,12 @@ function detenerReconocimientoVozLeccion(
 
 
     /* =====================================================
-       SOLTAR CAPTURA DEL PUNTERO
+       LIBERAR PUNTERO
        ===================================================== */
 
     if (
         evento &&
         boton &&
-        boton.releasePointerCapture &&
         boton.hasPointerCapture &&
         boton.hasPointerCapture(
             evento.pointerId
@@ -946,7 +1262,7 @@ function detenerReconocimientoVozLeccion(
 
 
     /* =====================================================
-       VISUAL: ANALIZANDO
+       ESTADO VISUAL
        ===================================================== */
 
     if (boton) {
@@ -992,102 +1308,21 @@ function detenerReconocimientoVozLeccion(
     }
 
 
-    /* =====================================================
-       DETENER
+    /*
+    Si Chrome ya inició el reconocimiento,
+    lo terminamos.
 
-       Si SpeechRecognition todavía no terminó de
-       iniciar, onstart se encargará de detenerlo.
-       ===================================================== */
+    Le damos 300 ms de margen para recibir
+    la última hipótesis del reconocimiento.
+    */
 
     if (
         reconocimientoVozIniciado
     ) {
 
-        try {
-
-            reconocimientoVozLeccion.stop();
-
-        } catch (error) {
-
-            console.warn(
-                "Error deteniendo reconocimiento:",
-                error
-            );
-        }
+        programarDetencionReconocimientoVoz();
     }
-
-    /* =====================================================
-        EVITAR QUE SE QUEDE ANALIZANDO INDEFINIDAMENTE
-        ===================================================== */
-
-        clearTimeout(
-            temporizadorFinReconocimiento
-        );
-
-
-        temporizadorFinReconocimiento =
-            setTimeout(
-                () => {
-
-                    if (
-                        reconocimientoVozLeccion &&
-                        reconocimientoVozActivo
-                    ) {
-
-                        console.warn(
-                            "El reconocimiento tardó demasiado. Se forzó la finalización."
-                        );
-
-
-                        try {
-
-                            reconocimientoVozLeccion.abort();
-
-                        } catch (error) {
-
-                            console.warn(
-                                "No se pudo abortar el reconocimiento:",
-                                error
-                            );
-                        }
-
-
-                        const resultado =
-                            document.getElementById(
-                                "resultadoPronunciacion"
-                            );
-
-
-                        if (
-                            resultado &&
-                            !reconocimientoVozTuvoResultado
-                        ) {
-
-                            resultado.innerHTML = `
-
-                                <div class="mensaje-voz-error">
-
-                                    <strong>
-                                        🎙️ No pude procesar tu voz
-                                    </strong>
-
-                                    <p>
-                                        Intenta nuevamente,
-                                        manteniendo presionado
-                                        mientras pronuncias la frase.
-                                    </p>
-
-                                </div>
-                            `;
-                        }
-                    }
-
-                },
-
-                2000
-            );
 }
-
 
 /* =========================================================
    EVALUAR PRONUNCIACIÓN
