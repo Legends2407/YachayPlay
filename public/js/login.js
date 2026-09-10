@@ -883,7 +883,11 @@ window.addEventListener(
    EVITAR CONTRASEÑA AUTORRELLENADA
    ========================================================= */
 
-function limpiarPasswordLogin() {
+/* =========================================================
+   CONTRASEÑA VACÍA AL ENTRAR AL LOGIN
+   ========================================================= */
+
+function prepararPasswordLogin() {
 
     const inputPassword =
         document.getElementById(
@@ -892,17 +896,9 @@ function limpiarPasswordLogin() {
 
 
     if (!inputPassword) {
-
         return;
     }
 
-
-    /*
-    No elimina la contraseña guardada
-    en Chrome/Edge.
-
-    Solo vacía visualmente el campo.
-    */
 
     inputPassword.value =
         "";
@@ -915,6 +911,22 @@ function limpiarPasswordLogin() {
     inputPassword.readOnly =
         false;
 }
+
+
+/* Carga normal */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    prepararPasswordLogin
+);
+
+
+/* Si el navegador recupera la página de caché */
+
+window.addEventListener(
+    "pageshow",
+    prepararPasswordLogin
+);
 
 
 /* =========================================================
