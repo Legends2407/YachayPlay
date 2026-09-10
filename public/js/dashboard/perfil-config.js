@@ -455,12 +455,6 @@ function obtenerUrlFotoPerfil(fotoPerfil) {
         return null;
     }
 
-
-    /*
-    Si ya viene como URL completa,
-    la usamos directamente.
-    */
-
     if (
         fotoPerfil.startsWith("http://") ||
         fotoPerfil.startsWith("https://")
@@ -469,26 +463,12 @@ function obtenerUrlFotoPerfil(fotoPerfil) {
         return fotoPerfil;
     }
 
-
-    /*
-    Si viene desde PostgreSQL como:
-    /uploads/perfiles/archivo.jpg
-
-    agregamos el servidor.
-    */
-
     if (fotoPerfil.startsWith("/")) {
 
-        return `http://localhost:3000${fotoPerfil}`;
+        return `${window.location.origin}${fotoPerfil}`;
     }
 
-
-    /*
-    Si por algún motivo viene sin "/"
-    también lo corregimos.
-    */
-
-    return `http://localhost:3000/${fotoPerfil}`;
+    return `${window.location.origin}/${fotoPerfil}`;
 }
 
 /* =========================================================
