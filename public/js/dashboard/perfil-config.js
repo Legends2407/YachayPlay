@@ -998,6 +998,34 @@ async function guardarFotoPerfil() {
             "mensajeFotoPerfil"
         );
 
+    const inputFoto =
+        document.getElementById(
+            "inputFotoPerfil"
+        );
+
+
+    const botonesFoto =
+        document.querySelectorAll(
+            ".acciones-foto-perfil button, .btn-foto-flotante"
+        );
+
+
+    if (inputFoto) {
+
+        inputFoto.disabled =
+            true;
+    }
+
+
+    botonesFoto.forEach(
+        boton => {
+
+            boton.disabled =
+                true;
+
+        }
+    );
+
 
     try {
 
@@ -1187,6 +1215,25 @@ async function guardarFotoPerfil() {
             mensaje.textContent =
                 `❌ ${error.message}`;
         }
+    }
+
+    finally {
+
+        if (inputFoto) {
+
+            inputFoto.disabled =
+                false;
+        }
+
+
+        botonesFoto.forEach(
+            boton => {
+
+                boton.disabled =
+                    false;
+
+            }
+        );
     }
 }
 

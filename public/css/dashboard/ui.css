@@ -1100,3 +1100,55 @@
         transform:scale(1);
     }
 }
+
+/* =========================================================
+   BOTONES EN ESTADO DE CARGA
+   ========================================================= */
+
+.boton-cargando{
+
+    cursor:wait !important;
+
+    pointer-events:none;
+
+    opacity:.85;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+}
+
+
+.spinner-yachay{
+
+    width:16px;
+
+    height:16px;
+
+    flex-shrink:0;
+
+    border:
+        2px solid
+        rgba(255,255,255,.4);
+
+    border-top-color:white;
+
+    border-radius:50%;
+
+    animation:
+        girarSpinnerYachay
+        .7s linear infinite;
+}
+
+
+@keyframes girarSpinnerYachay{
+
+    to{
+        transform:
+            rotate(360deg);
+    }
+}

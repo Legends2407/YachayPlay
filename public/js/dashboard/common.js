@@ -2185,3 +2185,93 @@ function celebrarCompraYachay(
 
     });
 }
+
+/* =========================================================
+   ESTADO DE CARGA DE BOTONES
+   ========================================================= */
+
+function iniciarCargaBoton(
+    boton,
+    texto = "⏳ Procesando..."
+) {
+
+    if (!boton) {
+        return;
+    }
+
+
+    /*
+    Guardamos el contenido original para
+    restaurarlo si la operación falla.
+    */
+
+    if (!boton.dataset.textoOriginal) {
+
+        boton.dataset.textoOriginal =
+            boton.innerHTML;
+    }
+
+
+    boton.disabled =
+        true;
+
+
+    boton.classList.add(
+        "boton-cargando"
+    );
+
+
+    boton.innerHTML = `
+
+        <span class="spinner-yachay"></span>
+
+        <span>
+            ${texto}
+        </span>
+    `;
+}
+
+
+/* =========================================================
+   QUITAR ESTADO DE CARGA
+   ========================================================= */
+
+function finalizarCargaBoton(
+    boton
+) {
+
+    if (!boton) {
+        return;
+    }
+
+
+    /*
+    Si otra función ya volvió a dibujar la página,
+    el botón antiguo ya no está en el DOM.
+    */
+
+    if (!boton.isConnected) {
+        return;
+    }
+
+
+    boton.disabled =
+        false;
+
+
+    boton.classList.remove(
+        "boton-cargando"
+    );
+
+
+    if (
+        boton.dataset.textoOriginal
+    ) {
+
+        boton.innerHTML =
+            boton.dataset.textoOriginal;
+
+
+        delete boton.dataset.textoOriginal;
+    }
+}

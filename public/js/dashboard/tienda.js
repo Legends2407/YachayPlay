@@ -170,7 +170,8 @@ function renderizarTienda(
                                 class="btn-quitar-marco"
                                 onclick="
                                     equiparMarcoTienda(
-                                        'ninguno'
+                                        'ninguno',
+                                        this
                                     )
                                 "
                             >
@@ -340,7 +341,8 @@ function crearTarjetaTienda(
 
                 onclick="
                     equiparMarcoTienda(
-                        '${articulo.id}'
+                        '${articulo.id}',
+                        this
                     )
                 "
             >
@@ -484,6 +486,11 @@ async function comprarArticuloTienda(
     boton
 ) {
 
+    iniciarCargaBoton(
+        boton,
+        "Comprando..."
+    );
+
     try {
 
         const respuesta =
@@ -567,6 +574,13 @@ async function comprarArticuloTienda(
         );
 
     }
+
+    finally {
+
+        finalizarCargaBoton(
+            boton
+        );
+    }
 }
 
 
@@ -575,8 +589,14 @@ async function comprarArticuloTienda(
    ========================================================= */
 
 async function equiparMarcoTienda(
-    marcoId
+    marcoId,
+    boton = null
 ) {
+
+    iniciarCargaBoton(
+        boton,
+        "Equipando..."
+    );
 
     try {
 
@@ -647,5 +667,12 @@ async function equiparMarcoTienda(
             error
         );
 
+    }
+
+    finally {
+
+        finalizarCargaBoton(
+            boton
+        );
     }
 }

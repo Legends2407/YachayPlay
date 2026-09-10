@@ -245,7 +245,8 @@ function crearTarjetaReto(
 
                 onclick="
                     reclamarReto(
-                        ${reto.id}
+                        ${reto.id},
+                        this
                     )
                 "
             >
@@ -411,8 +412,13 @@ function crearTarjetaReto(
    ========================================================= */
 
 async function reclamarReto(
-    retoId
+    retoId,
+    boton
 ) {
+    iniciarCargaBoton(
+        boton,
+        "Reclamando..."
+    );
 
     try {
 
@@ -524,11 +530,7 @@ async function reclamarReto(
         /* =================================================
            MOSTRAR RECOMPENSA
            ================================================= */
-
-        let mensaje =
-            "🎉 ¡Recompensa reclamada!";
-
-
+           
         if (
             data.recompensa_xp > 0
         ) {
@@ -560,5 +562,12 @@ async function reclamarReto(
             error
         );
 
+    }
+
+    finally {
+
+        finalizarCargaBoton(
+            boton
+        );
     }
 }

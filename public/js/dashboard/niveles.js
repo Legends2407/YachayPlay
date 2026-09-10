@@ -497,6 +497,11 @@ async function comprarNivel(
     boton
 ) {
 
+    iniciarCargaBoton(
+        boton,
+        "Desbloqueando..."
+    );
+
     const usuario =
         JSON.parse(
             localStorage.getItem(
@@ -565,6 +570,16 @@ async function comprarNivel(
         const data =
             await respuesta.json();
 
+        if (!respuesta.ok) {
+
+            console.warn(
+                "No se pudo desbloquear el nivel:",
+                data.mensaje
+            );
+
+            return;
+        }
+
         /* =================================================
            ACTUALIZAR USUARIO LOCAL
            ================================================= */
@@ -608,6 +623,13 @@ async function comprarNivel(
         console.error(
             "Error comprando nivel:",
             error
+        );
+    }
+
+    finally {
+
+    finalizarCargaBoton(
+            boton
         );
     }
 }
