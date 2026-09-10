@@ -354,7 +354,7 @@ function crearTarjetaTienda(
                 onclick="
                     comprarArticuloTienda(
                         '${articulo.id}',
-                        ${articulo.precio}
+                        ${articulo.precio},
                         this
                     )
                 "

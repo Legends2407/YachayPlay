@@ -11,7 +11,7 @@
 
 
 const API_DASHBOARD =
-    "http://localhost:3000";
+    "";
 
 
 let fotoPerfilSeleccionada =
