@@ -47,8 +47,10 @@ async function mostrarRetos() {
                 {
 
                     credentials:
-                        "include"
+                        "include",
 
+                    cache:
+                        "no-store"
                 }
 
             );
@@ -463,6 +465,24 @@ async function reclamarReto(
             return;
         }
 
+        /* =================================================
+        ACTUALIZAR BOTÓN INMEDIATAMENTE
+        ================================================= */
+
+        if (boton) {
+
+            boton.disabled =
+                true;
+
+
+            boton.className =
+                "btn-reto-reclamado";
+
+
+            boton.innerHTML =
+                "✅ Reclamado";
+        }
+
 
         /* =================================================
            ACTUALIZAR USUARIO
@@ -552,7 +572,7 @@ async function reclamarReto(
            RECARGAR RETOS
            ================================================= */
 
-        mostrarRetos();
+        await mostrarRetos();
 
 
     } catch (error) {
