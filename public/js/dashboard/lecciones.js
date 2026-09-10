@@ -1468,6 +1468,52 @@ function evaluarPronunciacionLeccion(
         "block";
 }
 
+/* =========================================================
+   MEZCLAR OPCIONES DE RESPUESTA
+   ========================================================= */
+
+function mezclarOpcionesLeccion(
+    opciones
+) {
+
+    /*
+    Creamos una copia para NO modificar
+    las opciones originales de LECCIONES.
+    */
+
+    const mezcladas =
+        [...opciones];
+
+
+    /*
+    Algoritmo Fisher-Yates.
+    */
+
+    for (
+        let i = mezcladas.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() *
+                (i + 1)
+            );
+
+
+        [
+            mezcladas[i],
+            mezcladas[j]
+        ] = [
+            mezcladas[j],
+            mezcladas[i]
+        ];
+    }
+
+
+    return mezcladas;
+}
 
 /* =========================================================
    MOSTRAR PREGUNTA
@@ -1567,7 +1613,9 @@ function mostrarPreguntaLeccion() {
 
                 <div class="opciones-grid">
 
-                    ${pregunta.opciones
+                    ${mezclarOpcionesLeccion(
+                        pregunta.opciones
+                    )
                         .map(
                             opcion => `
 
