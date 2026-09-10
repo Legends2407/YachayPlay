@@ -259,13 +259,27 @@ function validarPasswordTiempoReal() {
 
 inputPassword.addEventListener(
     "input",
-    validarPasswordTiempoReal
+    () => {
+
+        validarPasswordTiempoReal();
+
+        actualizarOjitoPassword(
+            inputPassword
+        );
+    }
 );
 
 
 inputConfirmar.addEventListener(
     "input",
-    validarPasswordTiempoReal
+    () => {
+
+        validarPasswordTiempoReal();
+
+        actualizarOjitoPassword(
+            inputConfirmar
+        );
+    }
 );
 
 
@@ -417,6 +431,12 @@ function alternarPassword(
         );
 
 
+    if (!input) {
+
+        return;
+    }
+
+
     if (
         input.type === "password"
     ) {
@@ -424,21 +444,102 @@ function alternarPassword(
         input.type =
             "text";
 
+
         boton.textContent =
             "🙈";
+
 
         boton.setAttribute(
             "aria-label",
             "Ocultar contraseña"
         );
 
+
     } else {
 
         input.type =
             "password";
 
+
         boton.textContent =
             "👁️";
+
+
+        boton.setAttribute(
+            "aria-label",
+            "Mostrar contraseña"
+        );
+    }
+}
+
+/* =========================================================
+   MOSTRAR / OCULTAR OJITO
+   ========================================================= */
+
+function actualizarOjitoPassword(
+    input
+) {
+
+    const wrapper =
+        input.closest(
+            ".password-wrapper"
+        );
+
+
+    if (!wrapper) {
+
+        return;
+    }
+
+
+    const boton =
+        wrapper.querySelector(
+            ".btn-ver-password"
+        );
+
+
+    if (!boton) {
+
+        return;
+    }
+
+
+    /* =====================================================
+       HAY TEXTO
+       ===================================================== */
+
+    if (
+        input.value.length > 0
+    ) {
+
+        boton.classList.add(
+            "visible"
+        );
+
+
+    /* =====================================================
+       CAMPO VACÍO
+       ===================================================== */
+
+    } else {
+
+        boton.classList.remove(
+            "visible"
+        );
+
+
+        /*
+        Si borró todo mientras estaba mostrando
+        la contraseña, volvemos al modo oculto.
+        */
+
+        input.type =
+            "password";
+
+
+        boton.textContent =
+            "👁️";
+
 
         boton.setAttribute(
             "aria-label",

@@ -570,12 +570,19 @@ and (
 
     width:100%;
 
+    max-width:100%;
+
+    min-width:0;
+
     display:flex;
 
     flex-direction:column;
 
     gap:6px;
+
+    box-sizing:border-box;
 }
+
 
 
 .grupo-password label{
@@ -588,7 +595,6 @@ and (
 
     text-align:left;
 }
-
 
 /* =========================================================
    ESTADOS DE VALIDACIÓN
@@ -636,14 +642,28 @@ and (
     position:relative;
 
     width:100%;
+
+    max-width:100%;
+
+    min-width:0;
+
+    box-sizing:border-box;
 }
 
 
 .password-wrapper input{
 
+    display:block;
+
     width:100%;
 
-    padding-right:48px;
+    max-width:100%;
+
+    min-width:0;
+
+    padding-right:52px;
+
+    box-sizing:border-box;
 }
 
 
@@ -653,38 +673,101 @@ and (
 
     top:50%;
 
-    right:12px;
+    right:10px;
 
     transform:
         translateY(-50%);
+
+    z-index:5;
 
     width:34px;
 
     height:34px;
 
+    min-width:34px;
+
     padding:0;
 
+    margin:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
     border:none;
+
+    border-radius:50%;
 
     background:transparent;
 
     box-shadow:none;
 
-    color:#666;
-
     font-size:1.05rem;
 
     cursor:pointer;
+
+
+    /* OCULTO CUANDO NO HAY TEXTO */
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+
+    transition:
+        opacity .18s ease,
+        transform .18s ease;
+}
+
+
+
+.btn-ver-password.visible{
+
+    opacity:1;
+
+    visibility:visible;
+
+    pointer-events:auto;
 }
 
 
 .btn-ver-password:hover{
 
+    background:
+        rgba(107,15,168,.08);
+
     transform:
         translateY(-50%)
         scale(1.08);
 
-    background:transparent;
-
     box-shadow:none;
+}
+
+.btn-ver-password:active{
+
+    transform:
+        translateY(-50%)
+        scale(.95);
+}
+
+.login-card{
+
+    max-width:
+        calc(100vw - 32px);
+
+    box-sizing:border-box;
+}
+
+
+.login-card form{
+
+    width:100%;
+
+    max-width:100%;
+
+    min-width:0;
 }

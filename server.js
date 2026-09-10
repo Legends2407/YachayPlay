@@ -1032,7 +1032,7 @@ app.post(
                 return res.json({
 
                     mensaje:
-                        "Si existe una cuenta con ese correo, recibirás un enlace para cambiar tu contraseña."
+                        "Correo enviado"
 
                 });
             }
@@ -1054,7 +1054,7 @@ app.post(
                 return res.json({
 
                     mensaje:
-                        "Si existe una cuenta con ese correo, recibirás un enlace para cambiar tu contraseña."
+                        "Correo enviado"
 
                 });
             }
@@ -1127,7 +1127,7 @@ app.post(
             res.json({
 
                 mensaje:
-                    "Si existe una cuenta con ese correo, recibirás un enlace para cambiar tu contraseña."
+                    "Correo enviado"
 
             });
 
