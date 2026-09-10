@@ -3,7 +3,7 @@
    ========================================================= */
 
 const API_REGISTRO =
-    "http://localhost:3000";
+    "";
 
 
 const GOOGLE_CLIENT_ID =
