@@ -432,7 +432,6 @@ function alternarPassword(
 
 
     if (!input) {
-
         return;
     }
 
@@ -445,8 +444,9 @@ function alternarPassword(
             "text";
 
 
-        boton.textContent =
-            "🙈";
+        boton.classList.add(
+            "password-visible"
+        );
 
 
         boton.setAttribute(
@@ -461,8 +461,9 @@ function alternarPassword(
             "password";
 
 
-        boton.textContent =
-            "👁️";
+        boton.classList.remove(
+            "password-visible"
+        );
 
 
         boton.setAttribute(
@@ -487,7 +488,6 @@ function actualizarOjitoPassword(
 
 
     if (!wrapper) {
-
         return;
     }
 
@@ -499,14 +499,9 @@ function actualizarOjitoPassword(
 
 
     if (!boton) {
-
         return;
     }
 
-
-    /* =====================================================
-       HAY TEXTO
-       ===================================================== */
 
     if (
         input.value.length > 0
@@ -516,29 +511,16 @@ function actualizarOjitoPassword(
             "visible"
         );
 
-
-    /* =====================================================
-       CAMPO VACÍO
-       ===================================================== */
-
     } else {
 
         boton.classList.remove(
-            "visible"
+            "visible",
+            "password-visible"
         );
 
 
-        /*
-        Si borró todo mientras estaba mostrando
-        la contraseña, volvemos al modo oculto.
-        */
-
         input.type =
             "password";
-
-
-        boton.textContent =
-            "👁️";
 
 
         boton.setAttribute(

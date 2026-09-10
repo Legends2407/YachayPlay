@@ -667,6 +667,7 @@ and (
 }
 
 
+
 .btn-ver-password{
 
     position:absolute;
@@ -704,12 +705,7 @@ and (
 
     box-shadow:none;
 
-    font-size:1.05rem;
-
     cursor:pointer;
-
-
-    /* OCULTO CUANDO NO HAY TEXTO */
 
     opacity:0;
 
@@ -717,12 +713,11 @@ and (
 
     pointer-events:none;
 
-
     transition:
         opacity .18s ease,
+        background .18s ease,
         transform .18s ease;
 }
-
 
 
 .btn-ver-password.visible{
@@ -742,16 +737,86 @@ and (
 
     transform:
         translateY(-50%)
-        scale(1.08);
-
-    box-shadow:none;
+        scale(1.07);
 }
 
-.btn-ver-password:active{
+
+/* =========================================================
+   ICONO OJO HECHO CON CSS
+   ========================================================= */
+
+.icono-ojo{
+
+    position:relative;
+
+    width:20px;
+
+    height:13px;
+
+    display:block;
+
+    border:
+        2px solid #6b0fa8;
+
+    border-radius:
+        70% 15% 70% 15%;
 
     transform:
-        translateY(-50%)
-        scale(.95);
+        rotate(45deg);
+}
+
+
+/* PUPILA */
+
+.icono-ojo::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:5px;
+
+    height:5px;
+
+    top:50%;
+
+    left:50%;
+
+    border-radius:50%;
+
+    background:#6b0fa8;
+
+    transform:
+        translate(-50%,-50%);
+}
+
+
+/* =========================================================
+   LÍNEA CUANDO LA CONTRASEÑA ESTÁ VISIBLE
+   ========================================================= */
+
+.btn-ver-password.password-visible
+.icono-ojo::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:25px;
+
+    height:2px;
+
+    top:50%;
+
+    left:50%;
+
+    background:#6b0fa8;
+
+    border-radius:10px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(-45deg);
 }
 
 .login-card{
