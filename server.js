@@ -47,14 +47,29 @@ app.use(
 
     helmet({
 
-        /*
-        Por ahora lo desactivamos porque YachayPlay
-        todavía utiliza onclick inline y Google Identity.
-        Más adelante podemos configurar CSP correctamente.
-        */
+        /* =================================================
+           YACHAYPLAY todavía usa onclick inline
+           y Google Identity Services
+           ================================================= */
 
         contentSecurityPolicy:
-            false
+            false,
+
+
+        /* =================================================
+           PERMITIR POPUPS DE GOOGLE LOGIN
+
+           Helmet usa "same-origin" por defecto,
+           pero Google Sign-In necesita conservar
+           comunicación con la ventana emergente.
+           ================================================= */
+
+        crossOriginOpenerPolicy: {
+
+            policy:
+                "same-origin-allow-popups"
+
+        }
 
     })
 
