@@ -375,6 +375,9 @@ let reconocimientoVozTuvoError =
 let botonVozActual =
     null;
 
+let temporizadorFinReconocimiento =
+    null;
+
 
 /* =========================================================
    EMPEZAR A ESCUCHAR
@@ -1012,6 +1015,77 @@ function detenerReconocimientoVozLeccion(
             );
         }
     }
+
+    /* =====================================================
+        EVITAR QUE SE QUEDE ANALIZANDO INDEFINIDAMENTE
+        ===================================================== */
+
+        clearTimeout(
+            temporizadorFinReconocimiento
+        );
+
+
+        temporizadorFinReconocimiento =
+            setTimeout(
+                () => {
+
+                    if (
+                        reconocimientoVozLeccion &&
+                        reconocimientoVozActivo
+                    ) {
+
+                        console.warn(
+                            "El reconocimiento tardó demasiado. Se forzó la finalización."
+                        );
+
+
+                        try {
+
+                            reconocimientoVozLeccion.abort();
+
+                        } catch (error) {
+
+                            console.warn(
+                                "No se pudo abortar el reconocimiento:",
+                                error
+                            );
+                        }
+
+
+                        const resultado =
+                            document.getElementById(
+                                "resultadoPronunciacion"
+                            );
+
+
+                        if (
+                            resultado &&
+                            !reconocimientoVozTuvoResultado
+                        ) {
+
+                            resultado.innerHTML = `
+
+                                <div class="mensaje-voz-error">
+
+                                    <strong>
+                                        🎙️ No pude procesar tu voz
+                                    </strong>
+
+                                    <p>
+                                        Intenta nuevamente,
+                                        manteniendo presionado
+                                        mientras pronuncias la frase.
+                                    </p>
+
+                                </div>
+                            `;
+                        }
+                    }
+
+                },
+
+                2000
+            );
 }
 
 
