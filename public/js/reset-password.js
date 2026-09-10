@@ -259,27 +259,13 @@ function validarPasswordTiempoReal() {
 
 inputPassword.addEventListener(
     "input",
-    () => {
-
-        validarPasswordTiempoReal();
-
-        actualizarOjitoPassword(
-            inputPassword
-        );
-    }
+    validarPasswordTiempoReal
 );
 
 
 inputConfirmar.addEventListener(
     "input",
-    () => {
-
-        validarPasswordTiempoReal();
-
-        actualizarOjitoPassword(
-            inputConfirmar
-        );
-    }
+    validarPasswordTiempoReal
 );
 
 
@@ -419,113 +405,3 @@ form.addEventListener(
         }
     }
 );
-
-function alternarPassword(
-    inputId,
-    boton
-) {
-
-    const input =
-        document.getElementById(
-            inputId
-        );
-
-
-    if (!input) {
-        return;
-    }
-
-
-    if (
-        input.type === "password"
-    ) {
-
-        input.type =
-            "text";
-
-
-        boton.classList.add(
-            "password-visible"
-        );
-
-
-        boton.setAttribute(
-            "aria-label",
-            "Ocultar contraseña"
-        );
-
-
-    } else {
-
-        input.type =
-            "password";
-
-
-        boton.classList.remove(
-            "password-visible"
-        );
-
-
-        boton.setAttribute(
-            "aria-label",
-            "Mostrar contraseña"
-        );
-    }
-}
-
-/* =========================================================
-   MOSTRAR / OCULTAR OJITO
-   ========================================================= */
-
-function actualizarOjitoPassword(
-    input
-) {
-
-    const wrapper =
-        input.closest(
-            ".password-wrapper"
-        );
-
-
-    if (!wrapper) {
-        return;
-    }
-
-
-    const boton =
-        wrapper.querySelector(
-            ".btn-ver-password"
-        );
-
-
-    if (!boton) {
-        return;
-    }
-
-
-    if (
-        input.value.length > 0
-    ) {
-
-        boton.classList.add(
-            "visible"
-        );
-
-    } else {
-
-        boton.classList.remove(
-            "visible",
-            "password-visible"
-        );
-
-
-        input.type =
-            "password";
-
-
-        boton.setAttribute(
-            "aria-label",
-            "Mostrar contraseña"
-        );
-    }
-}
