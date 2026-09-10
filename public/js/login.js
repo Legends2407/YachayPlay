@@ -817,3 +817,64 @@ window.addEventListener(
         }
     }
 );
+
+/* =========================================================
+   ASEGURAR QUE LOS CAMPOS SIEMPRE SE PUEDAN EDITAR
+   ========================================================= */
+
+function habilitarCamposLogin() {
+
+    if (inputCorreo) {
+
+        inputCorreo.disabled =
+            false;
+
+        inputCorreo.readOnly =
+            false;
+
+        inputCorreo.tabIndex =
+            0;
+
+        inputCorreo.style.pointerEvents =
+            "auto";
+    }
+
+
+    if (inputPassword) {
+
+        inputPassword.disabled =
+            false;
+
+        inputPassword.readOnly =
+            false;
+
+        inputPassword.tabIndex =
+            0;
+
+        inputPassword.style.pointerEvents =
+            "auto";
+    }
+}
+
+
+/* =========================================================
+   AL CARGAR NORMALMENTE
+   ========================================================= */
+
+window.addEventListener(
+    "load",
+    habilitarCamposLogin
+);
+
+
+/* =========================================================
+   AL VOLVER DESDE OTRA PÁGINA
+
+   pageshow también se ejecuta cuando el navegador recupera
+   una página desde su caché.
+   ========================================================= */
+
+window.addEventListener(
+    "pageshow",
+    habilitarCamposLogin
+);

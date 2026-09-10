@@ -546,3 +546,18 @@ and (
 
     text-decoration:none;
 }
+
+/* =========================================================
+   CAMPOS LOGIN EDITABLES
+   ========================================================= */
+
+.login-card input{
+
+    position:relative;
+
+    z-index:2;
+
+    pointer-events:auto;
+
+    cursor:text;
+}

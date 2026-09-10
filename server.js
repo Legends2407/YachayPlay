@@ -21,9 +21,6 @@ const rateLimit =
 const crypto =
     require("crypto");
 
-const nodemailer =
-    require("nodemailer");
-
 
 const { OAuth2Client } = require("google-auth-library");
 
@@ -106,39 +103,190 @@ const limiteAutenticacion =
 /* =========================================================
    CORREO PARA RECUPERACIÓN
    ========================================================= */
-
-const transporter =
-    nodemailer.createTransport({
-
-        host:
-            process.env.SMTP_HOST,
-
-        port:
-            Number(
-                process.env.SMTP_PORT || 465
-            ),
-
-        secure:
-            Number(
-                process.env.SMTP_PORT || 465
-            ) === 465,
-
-        auth: {
-
-            user:
-                process.env.SMTP_USER,
-
-            pass:
-                process.env.SMTP_PASS
-
-        }
-
-    });
-
-
 const APP_URL =
     process.env.APP_URL ||
     "http://localhost:3000";
+
+/* =========================================================
+   ENVIAR CORREO DE RECUPERACIÓN CON BREVO
+   ========================================================= */
+
+async function enviarCorreoRecuperacion(
+    usuario,
+    enlace
+) {
+
+    const respuesta =
+        await fetch(
+
+            "https://api.brevo.com/v3/smtp/email",
+
+            {
+
+                method:
+                    "POST",
+
+                headers: {
+
+                    "accept":
+                        "application/json",
+
+                    "api-key":
+                        process.env.BREVO_API_KEY,
+
+                    "content-type":
+                        "application/json"
+
+                },
+
+                body:
+                    JSON.stringify({
+
+                        sender: {
+
+                            name:
+                                "YachayPlay",
+
+                            email:
+                                process.env.BREVO_SENDER_EMAIL
+
+                        },
+
+
+                        to: [
+
+                            {
+
+                                email:
+                                    usuario.correo,
+
+                                name:
+                                    usuario.nombre ||
+                                    "Estudiante"
+
+                            }
+
+                        ],
+
+
+                        subject:
+                            "Recupera tu contraseña de YachayPlay",
+
+
+                        htmlContent: `
+
+                            <div
+                                style="
+                                    font-family:Arial,sans-serif;
+                                    max-width:550px;
+                                    margin:auto;
+                                    padding:25px;
+                                "
+                            >
+
+                                <h2
+                                    style="
+                                        color:#6b0fa8;
+                                    "
+                                >
+                                    🦅 YachayPlay
+                                </h2>
+
+
+                                <p>
+                                    Hola ${usuario.nombre || "estudiante"},
+                                </p>
+
+
+                                <p>
+                                    Recibimos una solicitud para
+                                    cambiar tu contraseña de YachayPlay.
+                                </p>
+
+
+                                <p>
+                                    Este enlace estará disponible
+                                    durante 30 minutos.
+                                </p>
+
+
+                                <a
+                                    href="${enlace}"
+
+                                    style="
+                                        display:inline-block;
+                                        margin:15px 0;
+                                        padding:12px 20px;
+                                        background:#8A2BE2;
+                                        color:white;
+                                        text-decoration:none;
+                                        border-radius:10px;
+                                        font-weight:bold;
+                                    "
+                                >
+
+                                    Cambiar contraseña
+
+                                </a>
+
+
+                                <p
+                                    style="
+                                        color:#777;
+                                        font-size:13px;
+                                    "
+                                >
+
+                                    Si tú no solicitaste este cambio,
+                                    puedes ignorar este correo.
+
+                                </p>
+
+                            </div>
+                        `
+
+                    })
+
+            }
+
+        );
+
+
+    /* =====================================================
+       VALIDAR RESPUESTA DE BREVO
+       ===================================================== */
+
+    if (!respuesta.ok) {
+
+        const detalleError =
+            await respuesta.text();
+
+
+        console.error(
+            "Error enviando correo con Brevo:",
+            respuesta.status,
+            detalleError
+        );
+
+
+        throw new Error(
+            "No se pudo enviar el correo de recuperación."
+        );
+    }
+
+
+    const data =
+        await respuesta.json();
+
+
+    console.log(
+        "Correo de recuperación enviado:",
+        data.messageId
+    );
+
+
+    return data;
+}
 
 /* =========================================================
    AUTENTICACIÓN JWT
@@ -970,86 +1118,10 @@ app.post(
                ENVIAR CORREO
                ============================================= */
 
-            await transporter.sendMail({
-
-                from:
-                    `"YachayPlay" <${process.env.SMTP_USER}>`,
-
-                to:
-                    usuario.correo,
-
-                subject:
-                    "Recupera tu contraseña de YachayPlay",
-
-                html: `
-
-                    <div
-                        style="
-                            font-family:Arial,sans-serif;
-                            max-width:550px;
-                            margin:auto;
-                            padding:25px;
-                        "
-                    >
-
-                        <h2
-                            style="
-                                color:#6b0fa8;
-                            "
-                        >
-                            🦅 YachayPlay
-                        </h2>
-
-
-                        <p>
-                            Hola ${usuario.nombre || "estudiante"},
-                        </p>
-
-
-                        <p>
-                            Recibimos una solicitud para
-                            cambiar tu contraseña.
-                        </p>
-
-
-                        <p>
-                            Este enlace estará disponible
-                            durante 30 minutos.
-                        </p>
-
-
-                        <a
-                            href="${enlace}"
-
-                            style="
-                                display:inline-block;
-                                margin:15px 0;
-                                padding:12px 20px;
-                                background:#8A2BE2;
-                                color:white;
-                                text-decoration:none;
-                                border-radius:10px;
-                                font-weight:bold;
-                            "
-                        >
-                            Cambiar contraseña
-                        </a>
-
-
-                        <p
-                            style="
-                                color:#777;
-                                font-size:13px;
-                            "
-                        >
-                            Si tú no solicitaste este cambio,
-                            puedes ignorar este correo.
-                        </p>
-
-                    </div>
-                `
-
-            });
+            await enviarCorreoRecuperacion(
+                usuario,
+                enlace
+            );
 
 
             res.json({
