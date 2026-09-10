@@ -6,12 +6,80 @@ const path = require("path");
 const fs = require("fs");
 const bcrypt = require("bcrypt");
 
+
+
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+
+const helmet =
+    require("helmet");
+
+
+const rateLimit =
+    require("express-rate-limit");
 
 const { OAuth2Client } = require("google-auth-library");
 
 const app = express();
+
+/* =========================================================
+   RAILWAY / PROXY
+   ========================================================= */
+
+app.set(
+    "trust proxy",
+    1
+);
+
+
+/* =========================================================
+   HEADERS DE SEGURIDAD
+   ========================================================= */
+
+app.use(
+
+    helmet({
+
+        /*
+        Por ahora lo desactivamos porque YachayPlay
+        todavía utiliza onclick inline y Google Identity.
+        Más adelante podemos configurar CSP correctamente.
+        */
+
+        contentSecurityPolicy:
+            false
+
+    })
+
+);
+
+/* =========================================================
+   PROTECCIÓN DE AUTENTICACIÓN
+   ========================================================= */
+
+const limiteAutenticacion =
+    rateLimit({
+
+        windowMs:
+            15 * 60 * 1000,
+
+        max:
+            20,
+
+        standardHeaders:
+            true,
+
+        legacyHeaders:
+            false,
+
+        message: {
+
+            mensaje:
+                "Demasiados intentos. Espera unos minutos e inténtalo nuevamente."
+
+        }
+
+    });
 
 /* =========================================================
    AUTENTICACIÓN JWT
@@ -505,6 +573,8 @@ app.get("/", async (req, res) => {
 app.post(
     "/register",
 
+    limiteAutenticacion,
+
     async (req, res) => {
 
         try {
@@ -696,6 +766,8 @@ app.post(
 
 app.post(
     "/login",
+
+    limiteAutenticacion,
 
     async (req, res) => {
 
@@ -1099,7 +1171,7 @@ async function actualizarRachaUsuario(
    AUTENTICACIÓN GOOGLE (INTEGRADA A POSTGRESQL)
    ========================================================= */
 
-app.post('/auth/google', async (req, res) => {
+app.post('/auth/google', limiteAutenticacion, async (req, res) => {
     const { token } = req.body;
 
     try {
