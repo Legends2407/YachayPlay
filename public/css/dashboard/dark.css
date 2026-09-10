@@ -706,3 +706,147 @@ body.modo-oscuro
 
     color:#e2e6ed;
 }
+
+/* =========================================================
+   INICIO - MODO OSCURO
+   ========================================================= */
+
+body.modo-oscuro
+.inicio-card,
+
+body.modo-oscuro
+.inicio-recurso-card{
+
+    background:#202837;
+
+    border-color:#354053;
+
+    color:#e8edf5;
+}
+
+
+body.modo-oscuro
+.inicio-card h2,
+
+body.modo-oscuro
+.inicio-siguiente-leccion strong,
+
+body.modo-oscuro
+.inicio-recurso-card strong{
+
+    color:#f2f5fa;
+}
+
+
+body.modo-oscuro
+.inicio-card-descripcion,
+
+body.modo-oscuro
+.inicio-progreso-info{
+
+    color:#aeb7c5;
+}
+
+
+body.modo-oscuro
+.inicio-nivel-badge,
+
+body.modo-oscuro
+.inicio-retos-contador{
+
+    background:#38294a;
+
+    color:#daa1ff;
+}
+
+
+body.modo-oscuro
+.inicio-progreso-barra{
+
+    background:#394354;
+}
+
+
+body.modo-oscuro
+.inicio-siguiente-leccion{
+
+    background:#293243;
+}
+
+
+body.modo-oscuro
+.inicio-siguiente-icono{
+
+    background:#343e50;
+}
+
+
+body.modo-oscuro
+.inicio-reto-mini{
+
+    background:#283142;
+
+    border-color:#39465a;
+}
+
+
+body.modo-oscuro
+.inicio-reto-completado{
+
+    background:#21392c;
+
+    border-color:#315a40;
+}
+
+
+body.modo-oscuro
+.inicio-reto-mini strong{
+
+    color:#eef2f8;
+}
+
+
+body.modo-oscuro
+.inicio-reto-mini small{
+
+    color:#aeb7c5;
+}
+
+
+body.modo-oscuro
+.inicio-reto-barra{
+
+    background:#414b5c;
+}
+
+
+body.modo-oscuro
+.btn-inicio-secundario{
+
+    background:#352846;
+
+    color:#d89dff;
+}
+
+
+body.modo-oscuro
+.inicio-consejo{
+
+    background:#3b3421;
+
+    border-color:#564929;
+}
+
+
+body.modo-oscuro
+.inicio-consejo span{
+
+    color:#e5c96d;
+}
+
+
+body.modo-oscuro
+.inicio-consejo strong{
+
+    color:#ffe7a3;
+}

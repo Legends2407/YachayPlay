@@ -363,3 +363,111 @@
         font-size:1.8rem;
     }
 }
+
+/* =========================================================
+   INICIO - TABLET
+   ========================================================= */
+
+@media (max-width:950px){
+
+    .inicio-principal-grid{
+
+        grid-template-columns:1fr;
+    }
+
+
+    .inicio-kuntur-bienvenida{
+
+        width:180px;
+
+        min-width:180px;
+    }
+
+
+    .inicio-kuntur-bienvenida img{
+
+        width:175px;
+    }
+}
+
+
+/* =========================================================
+   INICIO - MÓVIL
+   ========================================================= */
+
+@media (max-width:650px){
+
+    .inicio-bienvenida{
+
+        min-height:auto;
+
+        padding:
+            24px 21px 0;
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+
+    .inicio-bienvenida h1{
+
+        font-size:1.55rem;
+    }
+
+
+    .inicio-frase-dia{
+
+        width:100%;
+    }
+
+
+    .inicio-kuntur-bienvenida{
+
+        width:100%;
+
+        align-self:center;
+
+        justify-content:center;
+
+        margin-top:-5px;
+    }
+
+
+    .inicio-kuntur-bienvenida img{
+
+        width:145px;
+
+        max-height:145px;
+    }
+
+
+    .inicio-recursos{
+
+        grid-template-columns:1fr;
+    }
+
+
+    .inicio-card{
+
+        padding:20px;
+    }
+
+
+    .inicio-card-cabecera{
+
+        flex-direction:column;
+    }
+
+
+    .inicio-reto-mini-top{
+
+        flex-direction:column;
+    }
+
+
+    .inicio-reto-mini-top > span{
+
+        align-self:flex-start;
+    }
+}

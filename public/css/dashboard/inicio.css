@@ -1,0 +1,955 @@
+/* =========================================================
+   INICIO DEL DASHBOARD
+   ========================================================= */
+
+.inicio-dashboard{
+
+    max-width:1150px;
+
+    margin:0 auto;
+}
+
+
+/* =========================================================
+   CARGANDO / ERROR
+   ========================================================= */
+
+.inicio-cargando,
+.inicio-error{
+
+    min-height:350px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    color:#6d7280;
+
+    font-weight:700;
+}
+
+
+.inicio-error-icono{
+
+    margin-bottom:12px;
+
+    font-size:3rem;
+}
+
+
+/* =========================================================
+   BIENVENIDA
+   ========================================================= */
+
+.inicio-bienvenida{
+
+    position:relative;
+
+    min-height:230px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:30px;
+
+    overflow:hidden;
+
+    margin-bottom:22px;
+
+    padding:
+        30px 35px;
+
+    border-radius:24px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5f149d 0%,
+            #8f1ac1 48%,
+            #e22682 100%
+        );
+
+    box-shadow:
+        0 10px 28px
+        rgba(108,20,155,.22);
+}
+
+
+.inicio-bienvenida::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:330px;
+
+    height:330px;
+
+    right:-120px;
+
+    top:-150px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.08);
+}
+
+
+.inicio-bienvenida::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+
+    height:180px;
+
+    right:170px;
+
+    bottom:-130px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.06);
+}
+
+
+.inicio-bienvenida-texto{
+
+    position:relative;
+
+    z-index:2;
+
+    max-width:680px;
+}
+
+
+.inicio-saludo-mini{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    margin-bottom:9px;
+
+    color:
+        rgba(255,255,255,.78);
+
+    font-size:.82rem;
+
+    font-weight:700;
+}
+
+
+.inicio-bienvenida h1{
+
+    margin:
+        0 0 8px !important;
+
+    color:white !important;
+
+    font-size:2rem;
+
+    line-height:1.15;
+}
+
+
+.inicio-bienvenida-texto > p{
+
+    margin-bottom:20px;
+
+    color:
+        rgba(255,255,255,.85);
+
+    line-height:1.5;
+}
+
+
+/* =========================================================
+   EXPRESIÓN DEL DÍA
+   ========================================================= */
+
+.inicio-frase-dia{
+
+    width:fit-content;
+
+    max-width:100%;
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    align-items:center;
+
+    gap:
+        5px 13px;
+
+    padding:
+        10px 15px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    backdrop-filter:
+        blur(5px);
+}
+
+
+.inicio-frase-dia span{
+
+    width:100%;
+
+    color:
+        rgba(255,255,255,.68);
+
+    font-size:.68rem;
+
+    font-weight:800;
+
+    text-transform:uppercase;
+
+    letter-spacing:.6px;
+}
+
+
+.inicio-frase-dia strong{
+
+    color:#ffe477;
+
+    font-size:1rem;
+}
+
+
+.inicio-frase-dia small{
+
+    color:
+        rgba(255,255,255,.85);
+}
+
+
+/* =========================================================
+   KUNTUR
+   ========================================================= */
+
+.inicio-kuntur-bienvenida{
+
+    position:relative;
+
+    z-index:2;
+
+    width:220px;
+
+    min-width:220px;
+
+    align-self:flex-end;
+
+    display:flex;
+
+    justify-content:center;
+}
+
+
+.inicio-kuntur-bienvenida img{
+
+    width:205px;
+
+    max-height:210px;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(
+            0 10px 8px
+            rgba(34,7,55,.20)
+        );
+
+    animation:
+        flotarInicioKuntur
+        3s ease-in-out infinite;
+}
+
+
+@keyframes flotarInicioKuntur{
+
+    0%,
+    100%{
+
+        transform:
+            translateY(0);
+    }
+
+    50%{
+
+        transform:
+            translateY(-7px);
+    }
+}
+
+
+/* =========================================================
+   GRID PRINCIPAL
+   ========================================================= */
+
+.inicio-principal-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1.35fr)
+        minmax(300px,.9fr);
+
+    gap:20px;
+
+    margin-bottom:20px;
+}
+
+
+/* =========================================================
+   TARJETAS
+   ========================================================= */
+
+.inicio-card{
+
+    padding:25px;
+
+    border:
+        1px solid #e9e5ef;
+
+    border-radius:21px;
+
+    background:white;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,.07);
+}
+
+
+.inicio-card-cabecera{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-bottom:10px;
+}
+
+
+.inicio-card-etiqueta{
+
+    display:block;
+
+    margin-bottom:5px;
+
+    color:#8c63a7;
+
+    font-size:.69rem;
+
+    font-weight:900;
+
+    letter-spacing:.8px;
+}
+
+
+.inicio-card h2{
+
+    margin:0;
+
+    color:#142B6F;
+
+    font-size:1.3rem;
+}
+
+
+.inicio-card-descripcion{
+
+    margin-bottom:20px;
+
+    color:#6d7280;
+
+    line-height:1.45;
+}
+
+
+.inicio-nivel-badge{
+
+    flex-shrink:0;
+
+    padding:
+        7px 11px;
+
+    border-radius:50px;
+
+    background:#f2e8fb;
+
+    color:#7b1fd3;
+
+    font-size:.72rem;
+
+    font-weight:800;
+}
+
+
+/* =========================================================
+   PROGRESO APRENDIZAJE
+   ========================================================= */
+
+.inicio-progreso-info{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:8px;
+
+    color:#707481;
+
+    font-size:.8rem;
+
+    font-weight:700;
+}
+
+
+.inicio-progreso-info strong{
+
+    color:#7b1fd3;
+}
+
+
+.inicio-progreso-barra{
+
+    width:100%;
+
+    height:11px;
+
+    overflow:hidden;
+
+    margin-bottom:20px;
+
+    border-radius:50px;
+
+    background:#eee9f2;
+}
+
+
+.inicio-progreso-fill{
+
+    height:100%;
+
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #6b0fa8,
+            #e91e83
+        );
+
+    transition:
+        width .5s ease;
+}
+
+
+/* =========================================================
+   SIGUIENTE LECCIÓN
+   ========================================================= */
+
+.inicio-siguiente-leccion{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    margin-bottom:20px;
+
+    padding:13px 15px;
+
+    border-radius:15px;
+
+    background:#f8f5fb;
+}
+
+
+.inicio-siguiente-icono{
+
+    width:43px;
+
+    height:43px;
+
+    min-width:43px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:white;
+
+    font-size:1.3rem;
+
+    box-shadow:
+        0 3px 9px
+        rgba(0,0,0,.07);
+}
+
+
+.inicio-siguiente-leccion div:last-child{
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+
+.inicio-siguiente-leccion small{
+
+    margin-bottom:2px;
+
+    color:#8c8f99;
+}
+
+
+.inicio-siguiente-leccion strong{
+
+    color:#142B6F;
+}
+
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+
+.btn-inicio-continuar,
+.btn-inicio-secundario{
+
+    border:none;
+
+    border-radius:12px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        background .18s ease;
+}
+
+
+.btn-inicio-continuar{
+
+    width:100%;
+
+    padding:
+        12px 18px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6b0fa8,
+            #e91e83
+        );
+
+    box-shadow:
+        0 4px 0 #531080;
+}
+
+
+.btn-inicio-continuar:hover{
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 6px 0 #531080;
+}
+
+
+.btn-inicio-continuar:active{
+
+    transform:
+        translateY(2px);
+
+    box-shadow:
+        0 2px 0 #531080;
+}
+
+
+.btn-inicio-secundario{
+
+    width:100%;
+
+    margin-top:15px;
+
+    padding:
+        10px 15px;
+
+    color:#6b0fa8;
+
+    background:#f3ebfa;
+}
+
+
+.btn-inicio-secundario:hover{
+
+    background:#eadcf5;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   RETOS
+   ========================================================= */
+
+.inicio-retos-contador{
+
+    min-width:45px;
+
+    padding:
+        7px 10px;
+
+    text-align:center;
+
+    border-radius:50px;
+
+    background:#eee9f8;
+
+    color:#6b0fa8;
+
+    font-size:.75rem;
+
+    font-weight:900;
+}
+
+
+.inicio-retos-lista{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:11px;
+
+    margin-top:18px;
+}
+
+
+.inicio-reto-mini{
+
+    padding:
+        13px 14px;
+
+    border:
+        1px solid #ece8f0;
+
+    border-radius:14px;
+
+    background:#fafafd;
+}
+
+
+.inicio-reto-completado{
+
+    border-color:#bde6c9;
+
+    background:#f4fcf6;
+}
+
+
+.inicio-reto-mini-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+}
+
+
+.inicio-reto-mini-top > div{
+
+    min-width:0;
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+
+.inicio-reto-mini strong{
+
+    color:#27345f;
+
+    font-size:.86rem;
+}
+
+
+.inicio-reto-mini small{
+
+    margin-top:3px;
+
+    color:#888d97;
+
+    font-size:.72rem;
+
+    line-height:1.3;
+}
+
+
+.inicio-reto-mini-top > span{
+
+    flex-shrink:0;
+
+    color:#7b1fd3;
+
+    font-size:.67rem;
+
+    font-weight:800;
+}
+
+
+.inicio-reto-barra{
+
+    height:6px;
+
+    overflow:hidden;
+
+    margin-top:10px;
+
+    border-radius:50px;
+
+    background:#ece8ef;
+}
+
+
+.inicio-reto-fill{
+
+    height:100%;
+
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7b1fd3,
+            #e91e83
+        );
+}
+
+
+.inicio-sin-retos{
+
+    padding:25px;
+
+    text-align:center;
+
+    color:#888;
+}
+
+
+/* =========================================================
+   RECURSOS
+   ========================================================= */
+
+.inicio-recursos{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:15px;
+
+    margin-bottom:20px;
+}
+
+
+.inicio-recurso-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    padding:
+        16px 18px;
+
+    border:
+        1px solid #ebe8ef;
+
+    border-radius:17px;
+
+    background:white;
+
+    box-shadow:
+        0 4px 14px
+        rgba(0,0,0,.055);
+}
+
+
+.inicio-recurso-icono{
+
+    width:46px;
+
+    height:46px;
+
+    min-width:46px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:13px;
+
+    font-size:1.35rem;
+}
+
+
+.inicio-icono-racha{
+
+    background:#fff1df;
+}
+
+
+.inicio-icono-xp{
+
+    background:#eee8ff;
+}
+
+
+.inicio-icono-monedas{
+
+    background:#fff7d8;
+}
+
+
+.inicio-recurso-card div:last-child{
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+
+.inicio-recurso-card span{
+
+    margin-bottom:2px;
+
+    color:#8a8e98;
+
+    font-size:.73rem;
+}
+
+
+.inicio-recurso-card strong{
+
+    color:#142B6F;
+
+    font-size:1.05rem;
+}
+
+
+/* =========================================================
+   CONSEJO DE KUNTUR
+   ========================================================= */
+
+.inicio-consejo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:
+        15px 19px;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff8df,
+            #fffdf5
+        );
+
+    border:
+        1px solid #f0dfae;
+}
+
+
+.inicio-consejo-icono{
+
+    font-size:1.6rem;
+}
+
+
+.inicio-consejo div:last-child{
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+
+.inicio-consejo span{
+
+    margin-bottom:2px;
+
+    color:#9a791f;
+
+    font-size:.72rem;
+
+    font-weight:800;
+}
+
+
+.inicio-consejo strong{
+
+    color:#675315;
+
+    font-size:.87rem;
+
+    line-height:1.4;
+}
