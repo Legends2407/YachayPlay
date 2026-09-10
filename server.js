@@ -18,6 +18,13 @@ const helmet =
 const rateLimit =
     require("express-rate-limit");
 
+const crypto =
+    require("crypto");
+
+const nodemailer =
+    require("nodemailer");
+
+
 const { OAuth2Client } = require("google-auth-library");
 
 const app = express();
@@ -80,6 +87,43 @@ const limiteAutenticacion =
         }
 
     });
+
+/* =========================================================
+   CORREO PARA RECUPERACIÓN
+   ========================================================= */
+
+const transporter =
+    nodemailer.createTransport({
+
+        host:
+            process.env.SMTP_HOST,
+
+        port:
+            Number(
+                process.env.SMTP_PORT || 465
+            ),
+
+        secure:
+            Number(
+                process.env.SMTP_PORT || 465
+            ) === 465,
+
+        auth: {
+
+            user:
+                process.env.SMTP_USER,
+
+            pass:
+                process.env.SMTP_PASS
+
+        }
+
+    });
+
+
+const APP_URL =
+    process.env.APP_URL ||
+    "http://localhost:3000";
 
 /* =========================================================
    AUTENTICACIÓN JWT
@@ -751,6 +795,428 @@ app.post(
                         "Error al registrar usuario"
 
                 });
+        }
+    }
+);
+
+/* =========================================================
+   SOLICITAR RECUPERACIÓN DE CONTRASEÑA
+   ========================================================= */
+
+app.post(
+    "/forgot-password",
+
+    limiteAutenticacion,
+
+    async (req, res) => {
+
+        try {
+
+            const correo =
+                String(
+                    req.body.correo || ""
+                )
+                .trim()
+                .toLowerCase();
+
+
+            if (!correo) {
+
+                return res
+                    .status(400)
+                    .json({
+
+                        mensaje:
+                            "Ingresa tu correo electrónico."
+
+                    });
+            }
+
+
+            const resultado =
+                await pool.query(
+
+                    `
+                    SELECT
+                        id,
+                        nombre,
+                        correo,
+                        password_hash
+
+                    FROM usuarios
+
+                    WHERE LOWER(correo) =
+                          LOWER($1)
+                    `,
+
+                    [
+                        correo
+                    ]
+
+                );
+
+
+            /*
+            Importante:
+            devolvemos el mismo mensaje aunque
+            la cuenta no exista.
+            */
+
+            if (
+                resultado.rows.length === 0
+            ) {
+
+                return res.json({
+
+                    mensaje:
+                        "Si existe una cuenta con ese correo, recibirás un enlace para cambiar tu contraseña."
+
+                });
+            }
+
+
+            const usuario =
+                resultado.rows[0];
+
+
+            /*
+            Cuenta creada únicamente con Google.
+            No tiene contraseña local.
+            */
+
+            if (
+                !usuario.password_hash
+            ) {
+
+                return res.json({
+
+                    mensaje:
+                        "Si existe una cuenta con ese correo, recibirás un enlace para cambiar tu contraseña."
+
+                });
+            }
+
+
+            /* =============================================
+               TOKEN ALEATORIO
+               ============================================= */
+
+            const token =
+                crypto
+                    .randomBytes(32)
+                    .toString("hex");
+
+
+            /*
+            Nunca guardamos el token real
+            en PostgreSQL.
+            */
+
+            const tokenHash =
+                crypto
+                    .createHash("sha256")
+                    .update(token)
+                    .digest("hex");
+
+
+            const expiracion =
+                new Date(
+                    Date.now() +
+                    30 * 60 * 1000
+                );
+
+
+            await pool.query(
+
+                `
+                UPDATE usuarios
+
+                SET
+                    password_reset_token_hash = $1,
+                    password_reset_expires_at = $2
+
+                WHERE id = $3
+                `,
+
+                [
+                    tokenHash,
+                    expiracion,
+                    usuario.id
+                ]
+
+            );
+
+
+            const enlace =
+                `${APP_URL}/reset-password.html?token=${encodeURIComponent(token)}`;
+
+
+            /* =============================================
+               ENVIAR CORREO
+               ============================================= */
+
+            await transporter.sendMail({
+
+                from:
+                    `"YachayPlay" <${process.env.SMTP_USER}>`,
+
+                to:
+                    usuario.correo,
+
+                subject:
+                    "Recupera tu contraseña de YachayPlay",
+
+                html: `
+
+                    <div
+                        style="
+                            font-family:Arial,sans-serif;
+                            max-width:550px;
+                            margin:auto;
+                            padding:25px;
+                        "
+                    >
+
+                        <h2
+                            style="
+                                color:#6b0fa8;
+                            "
+                        >
+                            🦅 YachayPlay
+                        </h2>
+
+
+                        <p>
+                            Hola ${usuario.nombre || "estudiante"},
+                        </p>
+
+
+                        <p>
+                            Recibimos una solicitud para
+                            cambiar tu contraseña.
+                        </p>
+
+
+                        <p>
+                            Este enlace estará disponible
+                            durante 30 minutos.
+                        </p>
+
+
+                        <a
+                            href="${enlace}"
+
+                            style="
+                                display:inline-block;
+                                margin:15px 0;
+                                padding:12px 20px;
+                                background:#8A2BE2;
+                                color:white;
+                                text-decoration:none;
+                                border-radius:10px;
+                                font-weight:bold;
+                            "
+                        >
+                            Cambiar contraseña
+                        </a>
+
+
+                        <p
+                            style="
+                                color:#777;
+                                font-size:13px;
+                            "
+                        >
+                            Si tú no solicitaste este cambio,
+                            puedes ignorar este correo.
+                        </p>
+
+                    </div>
+                `
+
+            });
+
+
+            res.json({
+
+                mensaje:
+                    "Si existe una cuenta con ese correo, recibirás un enlace para cambiar tu contraseña."
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Error recuperando contraseña:",
+                error
+            );
+
+
+            res.status(500).json({
+
+                mensaje:
+                    "No se pudo procesar la solicitud. Intenta nuevamente."
+
+            });
+        }
+    }
+);
+
+
+/* =========================================================
+   ESTABLECER NUEVA CONTRASEÑA
+   ========================================================= */
+
+app.post(
+    "/reset-password",
+
+    limiteAutenticacion,
+
+    async (req, res) => {
+
+        try {
+
+            const token =
+                String(
+                    req.body.token || ""
+                );
+
+
+            const password =
+                String(
+                    req.body.password || ""
+                );
+
+
+            if (
+                !token ||
+                !password
+            ) {
+
+                return res
+                    .status(400)
+                    .json({
+
+                        mensaje:
+                            "Datos incompletos."
+
+                    });
+            }
+
+
+            if (
+                password.length < 5
+            ) {
+
+                return res
+                    .status(400)
+                    .json({
+
+                        mensaje:
+                            "La contraseña debe tener al menos 5 caracteres."
+
+                    });
+            }
+
+
+            const tokenHash =
+                crypto
+                    .createHash("sha256")
+                    .update(token)
+                    .digest("hex");
+
+
+            const resultado =
+                await pool.query(
+
+                    `
+                    SELECT id
+
+                    FROM usuarios
+
+                    WHERE password_reset_token_hash = $1
+
+                    AND password_reset_expires_at >
+                        CURRENT_TIMESTAMP
+                    `,
+
+                    [
+                        tokenHash
+                    ]
+
+                );
+
+
+            if (
+                resultado.rows.length === 0
+            ) {
+
+                return res
+                    .status(400)
+                    .json({
+
+                        mensaje:
+                            "El enlace es inválido o ya expiró."
+
+                    });
+            }
+
+
+            const usuarioId =
+                resultado.rows[0].id;
+
+
+            const passwordHash =
+                await bcrypt.hash(
+                    password,
+                    SALT_ROUNDS
+                );
+
+
+            await pool.query(
+
+                `
+                UPDATE usuarios
+
+                SET
+                    password_hash = $1,
+                    password_reset_token_hash = NULL,
+                    password_reset_expires_at = NULL
+
+                WHERE id = $2
+                `,
+
+                [
+                    passwordHash,
+                    usuarioId
+                ]
+
+            );
+
+
+            res.json({
+
+                mensaje:
+                    "Contraseña actualizada correctamente."
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Error cambiando contraseña:",
+                error
+            );
+
+
+            res.status(500).json({
+
+                mensaje:
+                    "No se pudo cambiar la contraseña."
+
+            });
         }
     }
 );

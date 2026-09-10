@@ -480,3 +480,69 @@ and (
             2px 0;
     }
 }
+
+.olvido-password{
+
+    width:100%;
+
+    text-align:right;
+
+    margin-top:-5px;
+
+    margin-bottom:5px;
+}
+
+
+.olvido-password a{
+
+    color:#8A2BE2;
+
+    font-size:.86rem;
+
+    font-weight:600;
+
+    text-decoration:none;
+}
+
+
+.olvido-password a:hover{
+
+    color:#E91E63;
+
+    text-decoration:underline;
+}
+
+.texto-recuperacion{
+
+    margin-bottom:20px;
+
+    color:#666;
+
+    line-height:1.5;
+
+    text-align:center;
+}
+
+
+.mensaje-recuperacion{
+
+    margin-top:18px;
+
+    color:#555;
+
+    font-size:.9rem;
+
+    line-height:1.5;
+
+    text-align:center;
+}
+
+
+.mensaje-recuperacion a{
+
+    color:#8A2BE2;
+
+    font-weight:700;
+
+    text-decoration:none;
+}
