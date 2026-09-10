@@ -1853,8 +1853,8 @@ app.post("/guardar-leccion", autenticarUsuario, async (req, res) => {
 
             const monedasGanadas =
                 primeraVez
-                    ? 10
-                    : 0;
+                    ? 20
+                    : 5;
 
 
 
