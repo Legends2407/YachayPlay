@@ -561,3 +561,130 @@ and (
 
     cursor:text;
 }
+
+/* =========================================================
+   NUEVA CONTRASEÑA
+   ========================================================= */
+
+.grupo-password{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+}
+
+
+.grupo-password label{
+
+    color:#142B6F;
+
+    font-size:.88rem;
+
+    font-weight:700;
+
+    text-align:left;
+}
+
+
+/* =========================================================
+   ESTADOS DE VALIDACIÓN
+   ========================================================= */
+
+.grupo-password input.campo-error{
+
+    border:
+        2px solid #e74c3c;
+
+    background:#fff8f8;
+}
+
+
+.grupo-password input.campo-correcto{
+
+    border:
+        2px solid #2ecc71;
+
+    background:#f8fff9;
+}
+
+
+.mensaje-correcto-password{
+
+    color:#27ae60 !important;
+}
+
+
+/* =========================================================
+   BOTÓN BLOQUEADO
+   ========================================================= */
+
+#btnCambiarPassword:disabled{
+
+    opacity:.55;
+
+    cursor:not-allowed;
+
+    transform:none;
+}
+
+.password-wrapper{
+
+    position:relative;
+
+    width:100%;
+}
+
+
+.password-wrapper input{
+
+    width:100%;
+
+    padding-right:48px;
+}
+
+
+.btn-ver-password{
+
+    position:absolute;
+
+    top:50%;
+
+    right:12px;
+
+    transform:
+        translateY(-50%);
+
+    width:34px;
+
+    height:34px;
+
+    padding:0;
+
+    border:none;
+
+    background:transparent;
+
+    box-shadow:none;
+
+    color:#666;
+
+    font-size:1.05rem;
+
+    cursor:pointer;
+}
+
+
+.btn-ver-password:hover{
+
+    transform:
+        translateY(-50%)
+        scale(1.08);
+
+    background:transparent;
+
+    box-shadow:none;
+}
