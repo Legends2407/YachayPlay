@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Registro YachayPlay
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/registro.css"
+    >
+
+    <!-- GOOGLE IDENTITY SERVICES -->
+    <script
+        src="https://accounts.google.com/gsi/client"
+        async
+        defer
+    ></script>
+
+</head>
+
+<body>
+
+
+    <!-- =====================================================
+         FLECHA PARA VOLVER AL INDEX
+         ===================================================== -->
+
+    <a
+        href="index.html"
+        class="btn-regresar-auth"
+        title="Volver al inicio"
+        aria-label="Volver al inicio"
+    ></a>
+
+
+    <!-- =====================================================
+         REGISTRO
+         ===================================================== -->
+
+    <div class="register-container">
+
+
+        <div class="register-card">
+
+
+            <!-- =================================================
+                 FORMULARIO
+                 ================================================= -->
+
+            <div class="form-section">
+
+
+                <img
+                    src="assets/logo-yachayplay.png"
+                    class="logo"
+                    alt="YachayPlay"
+                >
+
+
+                <h1>
+                    Crear Cuenta
+                </h1>
+
+
+                <form
+                    id="formRegistro"
+                    novalidate
+                >
+
+
+                    <!-- =========================================
+                         NOMBRE
+                         ========================================= -->
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        placeholder="Nombre"
+                        autocomplete="given-name"
+                        required
+                    >
+
+                    <small
+                        class="mensaje-error-campo"
+                        id="errorNombre"
+                    ></small>
+
+
+
+                    <!-- =========================================
+                         APELLIDO
+                         ========================================= -->
+
+                    <input
+                        type="text"
+                        id="apellido"
+                        placeholder="Apellido"
+                        autocomplete="family-name"
+                        required
+                    >
+
+                    <small
+                        class="mensaje-error-campo"
+                        id="errorApellido"
+                    ></small>
+
+
+
+                    <!-- =========================================
+                         CORREO
+                         ========================================= -->
+
+                    <input
+                        type="email"
+                        id="correo"
+                        placeholder="Correo electrónico"
+                        autocomplete="email"
+                        required
+                    >
+
+                    <small
+                        class="mensaje-error-campo"
+                        id="errorCorreo"
+                    ></small>
+
+
+
+                    <!-- =========================================
+                         CONTRASEÑA
+                         ========================================= -->
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Contraseña"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <small
+                        class="mensaje-error-campo"
+                        id="errorPassword"
+                    ></small>
+
+
+
+                    <!-- =========================================
+                         CREAR CUENTA
+                         ========================================= -->
+
+                    <button type="submit">
+
+                        Crear cuenta
+
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- =================================================
+                     SEPARADOR
+                     ================================================= -->
+
+                <div class="separator">
+
+                    o continúa con
+
+                </div>
+
+
+
+                <!-- =================================================
+                     GOOGLE
+                     ================================================= -->
+
+                <div
+                    id="googleBtnDiv"
+                    class="google-btn-container"
+                ></div>
+
+
+                <small
+                    class="mensaje-error-google"
+                    id="errorGoogle"
+                ></small>
+
+
+
+                <!-- =================================================
+                     IR A LOGIN
+                     ================================================= -->
+
+                <p>
+
+                    ¿Ya tienes cuenta?
+
+                    <a href="login.html">
+                        Inicia sesión
+                    </a>
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MASCOTA
+                 ================================================= -->
+
+            <div class="image-section">
+
+
+                <img
+                    src="assets/condor-yachayplay.png"
+                    alt="Cóndor YachayPlay"
+                >
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <script src="js/registro.js"></script>
+
+
+</body>
+
+</html>

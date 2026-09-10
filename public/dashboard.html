@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Dashboard - YachayPlay
+    </title>
+
+    <!-- =====================================================
+     ESTILOS DEL DASHBOARD
+     ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard/base.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard/niveles.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard/lecciones.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard/perfil-config.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard/retos.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard/tienda.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard/logros.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard/ui.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard/dark.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard/responsive.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="container" id="dashboardContainer">
+
+
+    <!-- =====================================================
+         MENÚ LATERAL
+         ===================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+
+        <!-- CABECERA DEL MENÚ -->
+
+        <div class="sidebar-header">
+
+            <img
+                src="assets/logo-yachayplay.png"
+                class="logo"
+                alt="YachayPlay"
+            >
+
+
+            <button
+                class="btn-menu"
+                id="btnMenu"
+                onclick="toggleSidebar()"
+                title="Minimizar menú"
+                aria-label="Minimizar o maximizar menú"
+            >
+
+                ☰
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             NAVEGACIÓN
+             ================================================= -->
+
+        <nav class="sidebar-nav">
+
+
+            <!-- =============================================
+                 INICIO
+                 ============================================= -->
+
+            <ul class="menu-grupo">
+
+                <li
+                    onclick="mostrarInicio()"
+                    title="Inicio"
+                >
+
+                    <span class="menu-icono">
+                        🏠
+                    </span>
+
+                    <span class="menu-texto">
+                        Inicio
+                    </span>
+
+                </li>
+
+            </ul>
+
+
+
+            <!-- SEPARADOR -->
+
+            <div class="menu-separador"></div>
+
+
+
+            <!-- =============================================
+                 APRENDIZAJE
+                 ============================================= -->
+
+            <div class="menu-titulo">
+
+                <span class="menu-texto">
+                    APRENDIZAJE
+                </span>
+
+            </div>
+
+
+            <ul class="menu-grupo">
+
+
+                <li
+                    onclick="mostrarLecciones()"
+                    title="Lecciones"
+                >
+
+                    <span class="menu-icono">
+                        📚
+                    </span>
+
+                    <span class="menu-texto">
+                        Lecciones
+                    </span>
+
+                </li>
+
+
+                <li
+                    onclick="mostrarRetos()"
+                    title="Retos"
+                >
+
+                    <span class="menu-icono">
+                        🎯
+                    </span>
+
+                    <span class="menu-texto">
+                        Retos
+                    </span>
+
+                </li> 
+
+                <li
+                    onclick="mostrarLogros()"
+                    title="Logros"
+                >
+
+                    <span class="menu-icono">
+                        🏅
+                    </span>
+
+                    <span class="menu-texto">
+                        Logros
+                    </span>
+
+                </li>
+
+
+                <li
+                    onclick="mostrarTienda()"
+                    title="Tienda"
+                >
+
+                    <span class="menu-icono">
+                        🛒
+                    </span>
+
+                    <span class="menu-texto">
+                        Tienda
+                    </span>
+
+                </li>
+
+
+            </ul>
+
+
+
+            <!-- SEPARADOR -->
+
+            <div class="menu-separador"></div>
+
+
+
+            <!-- =============================================
+                 CUENTA
+                 ============================================= -->
+
+            <div class="menu-titulo">
+
+                <span class="menu-texto">
+                    CUENTA
+                </span>
+
+            </div>
+
+
+            <ul class="menu-grupo">
+
+
+                <li
+                    onclick="mostrarPerfil()"
+                    title="Perfil"
+                >
+
+                    <span class="menu-icono">
+                        👤
+                    </span>
+
+                    <span class="menu-texto">
+                        Perfil
+                    </span>
+
+                </li>
+
+
+                <li
+                    onclick="mostrarConfiguracion()"
+                    title="Configuración"
+                >
+
+                    <span class="menu-icono">
+                        ⚙️
+                    </span>
+
+                    <span class="menu-texto">
+                        Configuración
+                    </span>
+
+                </li>
+
+
+                <li
+                    class="menu-salir"
+                    onclick="cerrarSesion()"
+                    title="Cerrar sesión"
+                >
+
+                    <span class="menu-icono">
+                        🚪
+                    </span>
+
+                    <span class="menu-texto">
+                        Salir
+                    </span>
+
+                </li>
+
+
+            </ul>
+
+
+        </nav>
+
+
+        <!-- PIE DEL SIDEBAR -->
+
+        <div class="sidebar-footer">
+
+            <span class="menu-icono">
+                🦅
+            </span>
+
+            <span class="menu-texto">
+                YachayPlay
+            </span>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+         ===================================================== -->
+
+    <main class="content">
+
+
+        <!-- =================================================
+             ENCABEZADO
+             ================================================= -->
+
+        <header class="topbar">
+
+
+            <!-- TÍTULO -->
+
+            <div class="topbar-titulo">
+
+                <h2 id="tituloPagina">
+                    Inicio
+                </h2>
+
+            </div>
+
+
+
+            <!-- INFORMACIÓN DEL USUARIO -->
+
+            <div class="user-info">
+
+
+                <!-- RECURSOS -->
+
+                <div class="user-recursos">
+
+
+                    <div
+                        class="topbar-stat"
+                        title="Racha actual"
+                    >
+
+                        <span class="stat-icon">
+                            🔥
+                        </span>
+
+                        <span id="topbarRacha">
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="topbar-stat"
+                        title="Monedas"
+                    >
+
+                        <span class="stat-icon">
+                            🪙
+                        </span>
+
+                        <span id="topbarMonedas">
+                            0
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- LÍNEA DE SEPARACIÓN -->
+
+                <div class="topbar-separador"></div>
+
+
+
+                <!-- USUARIO -->
+
+                <div
+                    class="usuario-topbar"
+                    onclick="mostrarPerfil()"
+                    title="Ver perfil"
+                >
+
+
+                    <div
+                        class="usuario-avatar"
+                        id="usuarioAvatar"
+                    >
+
+                        <img
+                            id="usuarioAvatarImg"
+                            class="usuario-avatar-img"
+                            src=""
+                            alt="Foto de perfil"
+                            style="display:none;"
+                        >
+
+                        <span 
+                            id="usuarioAvatarInicial"
+                            class="usuario-avatar-inicial"
+                        >
+                            U
+                        </span>
+
+                    </div>
+
+
+                    <div class="usuario-datos">
+
+                        <span class="usuario-label">
+                            Usuario
+                        </span>
+
+                        <strong id="nombreUsuario">
+                            Usuario
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             CONTENIDO DINÁMICO
+             ================================================= -->
+
+        <div class="contenido-wrapper">
+
+            <!-- BOTÓN REGRESAR -->
+
+            <button
+                id="btnRegresar"
+                class="btn-regresar"
+                onclick="volverDashboard()"
+                title="Regresar"
+                aria-label="Regresar"
+                type="button"
+            ></button>
+
+
+            <!-- CONTENIDO DINÁMICO -->
+
+            <div id="contenido"></div>
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- =====================================================
+     DASHBOARD - JAVASCRIPT
+     ===================================================== -->
+
+<script src="js/dashboard/common.js"></script>
+
+<script src="js/dashboard/lecciones-data.js"></script>
+
+<script src="js/dashboard/niveles.js"></script>
+
+<script src="js/dashboard/lecciones.js"></script>
+
+<script src="js/dashboard/retos.js"></script>
+
+<script src="js/dashboard/logros.js"></script>
+
+<script src="js/dashboard/tienda.js"></script>
+
+<script src="js/dashboard/perfil-config.js"></script>
+
+<script src="js/dashboard/init.js"></script>
+
+
+
+</body>
+
+</html>

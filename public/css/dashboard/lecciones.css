@@ -1,0 +1,939 @@
+/* =========================================================
+   LECCIONES
+   ========================================================= */
+
+.pregunta-card{
+
+    margin-top:25px;
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:20px;
+}
+
+
+.leccion-layout{
+
+    display:grid;
+
+    grid-template-columns:
+        2fr 1fr;
+
+    gap:25px;
+}
+
+
+.zona-pregunta{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+}
+
+
+.pregunta-numero{
+
+    font-weight:700;
+
+    color:#142B6F;
+
+    margin-bottom:10px;
+}
+
+
+/* =========================================================
+   PROGRESO
+   ========================================================= */
+
+.barra-progreso{
+
+    width:100%;
+
+    height:10px;
+
+    background:#ddd;
+
+    border-radius:20px;
+
+    margin-bottom:30px;
+
+    overflow:hidden;
+}
+
+
+.progreso{
+
+    width:33%;
+
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00c853,
+            #ffb703
+        );
+}
+
+
+/* =========================================================
+   OPCIONES
+   ========================================================= */
+
+.opciones-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:18px;
+
+    margin-top:25px;
+}
+
+
+.opcion{
+
+    padding:22px;
+
+    border:
+        2px solid #ddd;
+
+    border-radius:16px;
+
+    background:white;
+
+    font-size:1.1rem;
+
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+
+.opcion:hover{
+
+    border-color:#E91E63;
+}
+
+
+.opcion.correcta{
+
+    background:#d8f8e5;
+
+    border-color:#2ecc71;
+}
+
+
+.opcion.incorrecta{
+
+    background:#ffe1e1;
+
+    border-color:#e74c3c;
+}
+
+
+/* =========================================================
+   RESPUESTA
+   ========================================================= */
+
+.resultado{
+
+    margin-top:20px;
+
+    font-weight:700;
+}
+
+
+.correcto-texto{
+
+    color:#2ecc71;
+}
+
+
+.incorrecto-texto{
+
+    color:#e74c3c;
+}
+
+
+.btn-continuar{
+
+    margin-top:20px;
+
+    padding:
+        12px 28px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#E91E63;
+
+    color:white;
+
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+
+/* =========================================================
+   KUNTUR
+   ========================================================= */
+
+.panel-aprende{
+
+    background:#fff4d8;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    text-align:center;
+}
+
+
+.panel-aprende h2{
+
+    color:#E91E63;
+
+    margin:
+        15px 0;
+}
+
+
+.panel-aprende img{
+
+    width:180px;
+
+    margin-top:20px;
+}
+
+
+/* =========================================================
+   RESULTADO FINAL ANTIGUO / BASE
+   ========================================================= */
+
+.resultado-final{
+
+    text-align:center;
+
+    padding:50px;
+}
+
+
+.resultado-final h1{
+
+    color:#142B6F;
+
+    margin-bottom:15px;
+}
+
+
+.recompensas-final{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:25px;
+
+    margin:
+        30px 0;
+
+    font-size:1.4rem;
+
+    font-weight:700;
+}
+
+
+/* =========================================================
+   EXPLICACIÓN
+   ========================================================= */
+
+.explicacion-layout{
+
+    display:grid;
+
+    grid-template-columns:
+        1.4fr 1fr;
+
+    gap:30px;
+
+    align-items:center;
+}
+
+
+.explicacion-texto{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:20px;
+}
+
+
+.palabra-kichwa{
+
+    font-size:2.5rem;
+
+    font-weight:800;
+
+    color:#E91E63;
+
+    margin:
+        20px 0;
+}
+
+
+/* =========================================================
+   AUDIO
+   ========================================================= */
+
+.btn-audio{
+
+    padding:
+        12px 22px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#FFB703;
+
+    color:#222;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    margin:
+        15px 0;
+}
+
+
+.btn-audio.hablando{
+
+    animation:
+        pulsoAudio .8s infinite;
+
+    background:#FFCC24;
+
+    color:#142B6F;
+}
+
+
+@keyframes pulsoAudio{
+
+    0%{
+
+        transform:scale(1);
+
+        box-shadow:
+            0 0 0 0
+            rgba(255,183,3,.7);
+    }
+
+    70%{
+
+        transform:scale(1.05);
+
+        box-shadow:
+            0 0 0 12px
+            rgba(255,183,3,0);
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        box-shadow:
+            0 0 0 0
+            rgba(255,183,3,0);
+    }
+}
+
+
+.nota-pronunciacion{
+
+    color:#666;
+
+    margin-bottom:25px;
+}
+
+
+/* =========================================================
+   MASCOTA
+   ========================================================= */
+
+.mascota-box{
+
+    text-align:center;
+}
+
+
+.mascota-animada{
+
+    width:260px;
+
+    animation:
+        flotar 2.5s
+        ease-in-out infinite;
+}
+
+
+.globo-mascota{
+
+    background:#fff4d8;
+
+    margin:
+        15px auto 0;
+
+    padding:15px;
+
+    border-radius:18px;
+
+    font-weight:700;
+
+    color:#142B6F;
+}
+
+
+@keyframes flotar{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-12px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+
+/* =========================================================
+   PRONUNCIACIÓN
+   ========================================================= */
+
+.resultado-pronunciacion{
+
+    margin-top:25px;
+
+    padding:18px;
+
+    border-radius:15px;
+
+    background:#f7f7f7;
+}
+
+
+.pronunciacion-excelente{
+
+    color:#2ecc71;
+}
+
+
+.pronunciacion-bien{
+
+    color:#f1c40f;
+}
+
+
+.pronunciacion-aceptable{
+
+    color:#e67e22;
+}
+
+
+.pronunciacion-mal{
+
+    color:#e74c3c;
+}
+
+
+.vidas{
+
+    font-size:1.5rem;
+
+    margin-bottom:10px;
+}
+
+
+/* =========================================================
+   ESCUCHANDO
+   ========================================================= */
+
+.escuchando-box{
+
+    margin-top:20px;
+
+    padding:18px;
+
+    border-radius:15px;
+
+    background:#fff4d8;
+
+    text-align:center;
+
+    font-weight:700;
+
+    color:#142B6F;
+}
+
+
+.ondas-audio{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:6px;
+
+    margin-top:12px;
+}
+
+
+.ondas-audio span{
+
+    width:8px;
+
+    height:25px;
+
+    background:#E91E63;
+
+    border-radius:20px;
+
+    animation:
+        onda 1s infinite
+        ease-in-out;
+}
+
+
+.ondas-audio span:nth-child(2){
+
+    animation-delay:.15s;
+}
+
+
+.ondas-audio span:nth-child(3){
+
+    animation-delay:.3s;
+}
+
+
+.ondas-audio span:nth-child(4){
+
+    animation-delay:.45s;
+}
+
+
+@keyframes onda{
+
+    0%,
+    100%{
+
+        height:12px;
+    }
+
+    50%{
+
+        height:35px;
+    }
+}
+
+
+/* =========================================================
+   RESULTADO DE LECCIÓN MEJORADO
+   ========================================================= */
+
+.resultado-leccion-mejorado{
+
+    max-width:780px;
+
+    margin:
+        0 auto;
+
+    text-align:center;
+
+    padding:35px;
+
+    border-radius:22px;
+
+    background:#ffffff;
+
+    box-shadow:
+        0 8px 28px
+        rgba(0,0,0,.10);
+}
+
+
+/* =========================================================
+   CELEBRACIÓN
+   ========================================================= */
+
+.resultado-celebracion{
+
+    margin-bottom:28px;
+}
+
+
+.resultado-icono-grande{
+
+    font-size:4rem;
+
+    line-height:1;
+
+    margin-bottom:12px;
+
+    animation:
+        resultadoEntrada .5s ease;
+}
+
+
+.resultado-celebracion h1{
+
+    margin:
+        0 0 8px;
+
+    color:#6b0fa8;
+
+    font-size:2rem;
+}
+
+
+.resultado-nombre-leccion{
+
+    margin:
+        5px 0 12px;
+
+    color:#142B6F;
+
+    font-size:1.25rem;
+}
+
+
+.resultado-mensaje{
+
+    max-width:520px;
+
+    margin:
+        0 auto 14px;
+
+    color:#666;
+
+    line-height:1.5;
+}
+
+
+.resultado-tipo{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:
+        7px 14px;
+
+    border-radius:50px;
+
+    background:#f1e8fa;
+
+    color:#6b0fa8;
+
+    font-size:.82rem;
+
+    font-weight:700;
+}
+
+
+/* =========================================================
+   RENDIMIENTO
+   ========================================================= */
+
+.resultado-rendimiento{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:14px;
+
+    max-width:520px;
+
+    margin:
+        0 auto 30px;
+}
+
+
+.resultado-dato{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:12px;
+
+    padding:18px;
+
+    background:#f7f8fc;
+
+    border:
+        1px solid #e6e8ef;
+
+    border-radius:16px;
+}
+
+
+.resultado-dato-icono{
+
+    font-size:1.8rem;
+}
+
+
+.resultado-dato div{
+
+    display:flex;
+
+    flex-direction:column;
+
+    text-align:left;
+}
+
+
+.resultado-dato strong{
+
+    color:#142B6F;
+
+    font-size:1.2rem;
+}
+
+
+.resultado-dato small{
+
+    color:#777;
+
+    margin-top:2px;
+}
+
+
+.resultado-subtitulo{
+
+    margin:
+        0 0 14px;
+
+    color:#142B6F;
+}
+
+
+/* =========================================================
+   RECOMPENSAS
+   ========================================================= */
+
+.recompensas-mejoradas{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+
+    max-width:600px;
+
+    margin:
+        0 auto 25px;
+}
+
+
+.recompensa-card{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:
+        18px 12px;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fbf8ff,
+            #f4ecfb
+        );
+
+    border:
+        1px solid #eadcf6;
+}
+
+
+.recompensa-icono{
+
+    font-size:1.8rem;
+
+    margin-bottom:6px;
+}
+
+
+.recompensa-card strong{
+
+    font-size:1.35rem;
+
+    color:#6b0fa8;
+}
+
+
+.recompensa-card small{
+
+    margin-top:3px;
+
+    color:#777;
+}
+
+
+/* =========================================================
+   AVISO REPASO
+   ========================================================= */
+
+.resultado-aviso-repaso{
+
+    max-width:520px;
+
+    margin:
+        0 auto 25px;
+
+    padding:
+        12px 16px;
+
+    border-radius:12px;
+
+    background:#fff6df;
+
+    color:#7b5b11;
+
+    font-size:.88rem;
+
+    line-height:1.4;
+}
+
+
+/* =========================================================
+   BOTONES RESULTADO
+   ========================================================= */
+
+.resultado-acciones{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:25px;
+}
+
+
+.btn-resultado{
+
+    min-height:44px;
+
+    padding:
+        11px 18px;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease;
+}
+
+
+.btn-resultado:hover{
+
+    transform:
+        translateY(-2px);
+}
+
+
+.btn-repetir-leccion{
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6b0fa8,
+            #e91e83
+        );
+
+    box-shadow:
+        0 4px 10px
+        rgba(107,15,168,.22);
+}
+
+
+.btn-volver-nivel{
+
+    background:#142B6F;
+
+    color:white;
+}
+
+
+.btn-ver-niveles{
+
+    background:#eeeeF4;
+
+    color:#444;
+}
+
+
+@keyframes resultadoEntrada{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            scale(.75)
+            translateY(10px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}

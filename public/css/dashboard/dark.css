@@ -1,0 +1,708 @@
+/* =========================================================
+   MODO OSCURO GENERAL
+   ========================================================= */
+
+body.modo-oscuro{
+
+    background:#0f141e;
+
+    color:#e8edf5;
+}
+
+
+body.modo-oscuro
+.content{
+
+    background:#101621;
+}
+
+
+body.modo-oscuro
+#contenido{
+
+    background:#171e2b;
+
+    color:#e8edf5;
+
+    box-shadow:
+        0 4px 18px
+        rgba(0,0,0,.35);
+}
+
+
+/* =========================================================
+   TÍTULOS
+   ========================================================= */
+
+body.modo-oscuro
+.content h1,
+
+body.modo-oscuro
+.leccion-card h2,
+
+body.modo-oscuro
+.pregunta-numero,
+
+body.modo-oscuro
+.progreso-nivel p,
+
+body.modo-oscuro
+.resultado-final h1,
+
+body.modo-oscuro
+.config-item h3{
+
+    color:#f2f5fa;
+}
+
+
+/* =========================================================
+   TARJETAS
+   ========================================================= */
+
+body.modo-oscuro
+.stat-card,
+
+body.modo-oscuro
+.nivel-card,
+
+body.modo-oscuro
+.leccion-card,
+
+body.modo-oscuro
+.pregunta-card,
+
+body.modo-oscuro
+.zona-pregunta,
+
+body.modo-oscuro
+.explicacion-texto{
+
+    background:#202837;
+
+    color:#e8edf5;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,.25);
+}
+
+
+body.modo-oscuro
+.leccion-completada{
+
+    background:#193426;
+}
+
+
+/* =========================================================
+   TEXTOS
+   ========================================================= */
+
+body.modo-oscuro
+.info-nivel,
+
+body.modo-oscuro
+.leccion-card span,
+
+body.modo-oscuro
+.leccion-card small,
+
+body.modo-oscuro
+.mini-progreso span,
+
+body.modo-oscuro
+.nota-pronunciacion,
+
+body.modo-oscuro
+.perfil-correo,
+
+body.modo-oscuro
+.mensaje-foto-perfil,
+
+body.modo-oscuro
+.config-header p,
+
+body.modo-oscuro
+.config-seccion-titulo,
+
+body.modo-oscuro
+.config-item p{
+
+    color:#aeb7c5;
+}
+
+
+/* =========================================================
+   RESPUESTAS
+   ========================================================= */
+
+body.modo-oscuro
+.opcion{
+
+    background:#252e3e;
+
+    color:#edf1f7;
+
+    border-color:#3b4658;
+}
+
+
+body.modo-oscuro
+.opcion:hover{
+
+    border-color:#ff4f8b;
+}
+
+
+body.modo-oscuro
+.opcion.correcta{
+
+    background:#183d29;
+
+    color:#baf5cf;
+
+    border-color:#2ECC71;
+}
+
+
+body.modo-oscuro
+.opcion.incorrecta{
+
+    background:#452020;
+
+    color:#ffd1d1;
+
+    border-color:#e74c3c;
+}
+
+
+/* =========================================================
+   PROGRESO
+   ========================================================= */
+
+body.modo-oscuro
+.barra-progreso,
+
+body.modo-oscuro
+.mini-barra{
+
+    background:#384356;
+}
+
+
+/* =========================================================
+   PRONUNCIACIÓN
+   ========================================================= */
+
+body.modo-oscuro
+.resultado-pronunciacion{
+
+    background:#242c3b;
+
+    color:#e8edf5;
+}
+
+
+/* =========================================================
+   KUNTUR
+   ========================================================= */
+
+body.modo-oscuro
+.globo-mascota,
+
+body.modo-oscuro
+.panel-aprende,
+
+body.modo-oscuro
+.escuchando-box{
+
+    background:#3c3421;
+
+    color:#ffe7a3;
+}
+
+
+/* =========================================================
+   CONFIGURACIÓN
+   ========================================================= */
+
+body.modo-oscuro
+.config-item{
+
+    background:#202837;
+
+    border-color:#303b4e;
+
+    color:#e8edf5;
+}
+
+
+body.modo-oscuro
+.config-item:hover{
+
+    border-color:#46536a;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0,0,0,.25);
+}
+
+
+body.modo-oscuro
+.config-icono{
+
+    background:#2c3548;
+}
+
+
+body.modo-oscuro
+.btn-config{
+
+    background:#283142;
+
+    border-color:#3a465a;
+
+    color:#e8edf5;
+}
+
+
+body.modo-oscuro
+.btn-config:hover{
+
+    border-color:#ff4f8b;
+
+    color:#ff77a4;
+}
+
+
+body.modo-oscuro
+.estado-config{
+
+    color:#ce8cff;
+}
+
+
+/* =========================================================
+   FOTO
+   ========================================================= */
+
+body.modo-oscuro
+.perfil-avatar-grande{
+
+    border-color:#202837;
+}
+
+
+body.modo-oscuro
+.btn-eliminar-foto{
+
+    background:#303949;
+
+    color:#dfe5ee;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+body.modo-oscuro
+::-webkit-scrollbar{
+
+    width:10px;
+}
+
+
+body.modo-oscuro
+::-webkit-scrollbar-track{
+
+    background:#111722;
+}
+
+
+body.modo-oscuro
+::-webkit-scrollbar-thumb{
+
+    background:#39445a;
+
+    border-radius:10px;
+}
+
+
+body.modo-oscuro
+::-webkit-scrollbar-thumb:hover{
+
+    background:#4a5872;
+}
+
+
+/* =========================================================
+   NIVEL COMPRABLE
+   ========================================================= */
+
+body.modo-oscuro
+.nivel-comprable{
+
+    background:#332e1e;
+
+    border-left-color:#FFB703;
+}
+
+
+/* =========================================================
+   FLECHA REGRESAR
+   ========================================================= */
+
+body.modo-oscuro
+.btn-regresar{
+
+    filter:
+        drop-shadow(
+            0 4px 0 #470c80
+        )
+        drop-shadow(
+            0 8px 9px
+            rgba(0,0,0,.40)
+        );
+}
+
+
+/* =========================================================
+   RESULTADO
+   ========================================================= */
+
+body.modo-oscuro
+.resultado-leccion-mejorado{
+
+    background:#202837;
+
+    color:#e8edf5;
+
+    box-shadow:
+        0 8px 28px
+        rgba(0,0,0,.30);
+}
+
+
+body.modo-oscuro
+.resultado-celebracion h1,
+
+body.modo-oscuro
+.resultado-nombre-leccion,
+
+body.modo-oscuro
+.resultado-subtitulo,
+
+body.modo-oscuro
+.resultado-dato strong{
+
+    color:#f2f5fa;
+}
+
+
+body.modo-oscuro
+.resultado-mensaje,
+
+body.modo-oscuro
+.resultado-dato small,
+
+body.modo-oscuro
+.recompensa-card small{
+
+    color:#aeb7c5;
+}
+
+
+body.modo-oscuro
+.resultado-tipo{
+
+    background:#352447;
+
+    color:#d8a5ff;
+}
+
+
+body.modo-oscuro
+.resultado-dato{
+
+    background:#283142;
+
+    border-color:#39465a;
+}
+
+
+body.modo-oscuro
+.recompensa-card{
+
+    background:
+        linear-gradient(
+            145deg,
+            #2d3545,
+            #292f3e
+        );
+
+    border-color:#3d475a;
+}
+
+
+body.modo-oscuro
+.recompensa-card strong{
+
+    color:#df9aff;
+}
+
+
+body.modo-oscuro
+.resultado-aviso-repaso{
+
+    background:#3b3421;
+
+    color:#ffe29a;
+}
+
+
+body.modo-oscuro
+.btn-ver-niveles{
+
+    background:#30394a;
+
+    color:#e8edf5;
+}
+
+
+/* =========================================================
+   RETOS
+   ========================================================= */
+
+body.modo-oscuro
+.retos-header h1,
+
+body.modo-oscuro
+.reto-info h2{
+
+    color:#f2f5fa;
+}
+
+
+body.modo-oscuro
+.retos-header p,
+
+body.modo-oscuro
+.reto-info p,
+
+body.modo-oscuro
+.reto-progreso-texto{
+
+    color:#aeb7c5;
+}
+
+
+body.modo-oscuro
+.reto-card{
+
+    background:#252e3d;
+
+    border-color:#394458;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,.25);
+}
+
+
+body.modo-oscuro
+.reto-completado{
+
+    background:
+        linear-gradient(
+            135deg,
+            #252e3d,
+            #332640
+        );
+
+    border-color:#8549aa;
+}
+
+
+body.modo-oscuro
+.reto-barra{
+
+    background:#394354;
+}
+
+
+body.modo-oscuro
+.btn-reto-pendiente{
+
+    background:#353e4d;
+
+    color:#919aaa;
+}
+
+
+body.modo-oscuro
+.btn-reto-reclamado{
+
+    background:#223c2d;
+
+    color:#7cdc9a;
+}
+
+
+/* =========================================================
+   TIENDA
+   ========================================================= */
+
+body.modo-oscuro
+.tienda-equipado-badge{
+
+    background:#223c2d;
+
+    color:#7cdc9a;
+}
+
+
+/* =========================================================
+   LOGROS
+   ========================================================= */
+
+body.modo-oscuro
+.logros-header h1,
+
+body.modo-oscuro
+.logro-cabecera h2{
+
+    color:#f2f5fa;
+}
+
+
+body.modo-oscuro
+.logros-header p,
+
+body.modo-oscuro
+.logro-contenido p,
+
+body.modo-oscuro
+.logro-progreso-info{
+
+    color:#aeb7c5;
+}
+
+
+body.modo-oscuro
+.logros-progreso-general,
+
+body.modo-oscuro
+.logro-card{
+
+    background:#252e3d;
+
+    border-color:#394458;
+
+    box-shadow:
+        0 5px 17px
+        rgba(0,0,0,.24);
+}
+
+
+body.modo-oscuro
+.logro-desbloqueado{
+
+    background:
+        linear-gradient(
+            145deg,
+            #252e3d,
+            #332740
+        );
+
+    border-color:#824ca2;
+}
+
+
+body.modo-oscuro
+.logro-icono{
+
+    background:#343044;
+}
+
+
+body.modo-oscuro
+.logros-barra-general,
+
+body.modo-oscuro
+.logro-barra{
+
+    background:#3a4352;
+}
+
+
+body.modo-oscuro
+.logro-badge-progreso{
+
+    background:#363f4e;
+
+    color:#abb3c0;
+}
+
+
+body.modo-oscuro
+.logro-badge-desbloqueado{
+
+    background:#223c2d;
+
+    color:#7cdc9a;
+}
+
+
+body.modo-oscuro
+.logro-fecha{
+
+    color:#d099ee;
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+body.modo-oscuro
+.modal-yachay{
+
+    background:
+        linear-gradient(
+            145deg,
+            #252e3d,
+            #30263a
+        );
+
+    border-color:#864bb2;
+
+    box-shadow:
+        0 8px 0 #401066,
+        0 20px 50px
+        rgba(0,0,0,.45);
+}
+
+
+body.modo-oscuro
+.modal-yachay-titulo{
+
+    color:#f4f6fa;
+}
+
+
+body.modo-oscuro
+.modal-yachay-mensaje{
+
+    color:#b9c0cc;
+}
+
+
+body.modo-oscuro
+.modal-yachay-cancelar{
+
+    background:#364052;
+
+    color:#e2e6ed;
+}

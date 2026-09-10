@@ -1,0 +1,443 @@
+/* =========================================================
+   MARCOS DE PERFIL
+   ========================================================= */
+
+.marco_yachay{
+
+    border-radius:50%;
+
+    outline:
+        4px solid #b927c8;
+
+    box-shadow:
+        0 0 0 7px #7423c9,
+        0 0 18px rgba(233,30,131,.55);
+}
+
+
+.marco_fuego{
+
+    border-radius:50%;
+
+    outline:
+        4px solid #ff8a00;
+
+    box-shadow:
+        0 0 0 7px #ef233c,
+        0 0 20px rgba(255,87,34,.70);
+}
+
+
+.marco_dorado{
+
+    border-radius:50%;
+
+    outline:
+        4px solid #ffd166;
+
+    box-shadow:
+        0 0 0 7px #c98a00,
+        0 0 20px rgba(255,193,7,.60);
+}
+
+
+.marco_kuntur{
+
+    border-radius:50%;
+
+    outline:
+        4px solid #35c9e8;
+
+    box-shadow:
+        0 0 0 7px #6d28d9,
+        0 0 20px rgba(53,201,232,.55);
+}
+
+
+/* =========================================================
+   TIENDA
+   ========================================================= */
+
+.tienda-pagina{
+
+    max-width:1100px;
+
+    margin:
+        0 auto;
+}
+
+
+.tienda-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    margin-bottom:28px;
+}
+
+
+.tienda-header h1{
+
+    color:#142B6F;
+
+    margin-bottom:7px;
+}
+
+
+.tienda-header p{
+
+    color:#6d7280;
+}
+
+
+.tienda-monedas{
+
+    padding:
+        12px 20px;
+
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7b1fd3,
+            #e91e83
+        );
+
+    color:white;
+
+    font-weight:900;
+
+    font-size:1.1rem;
+}
+
+
+.tienda-seccion-titulo{
+
+    margin-bottom:15px;
+
+    color:#142B6F;
+
+    font-size:1.2rem;
+
+    font-weight:800;
+}
+
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.tienda-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:18px;
+}
+
+
+/* =========================================================
+   TARJETAS
+   ========================================================= */
+
+.tienda-card{
+
+    background:white;
+
+    padding:
+        24px 18px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    border:
+        1px solid #ebe6f1;
+
+    box-shadow:
+        0 5px 16px
+        rgba(0,0,0,.08);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.tienda-card:hover{
+
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 10px 22px
+        rgba(0,0,0,.12);
+}
+
+
+.tienda-card-equipado{
+
+    border:
+        2px solid #a72bd1;
+}
+
+
+/* =========================================================
+   PREVIEW
+   ========================================================= */
+
+.tienda-preview-marco{
+
+    width:100px;
+
+    height:100px;
+
+    margin:
+        10px auto 26px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+
+    border-radius:50%;
+
+    transition:
+        transform .2s ease;
+}
+
+
+.tienda-card:hover
+.tienda-preview-marco{
+
+    transform:
+        scale(1.06);
+}
+
+
+.tienda-avatar-preview{
+
+    width:70px;
+
+    height:70px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7b1fd3,
+            #e91e83
+        );
+
+    color:white;
+
+    font-size:1.8rem;
+
+    font-weight:900;
+}
+
+
+.tienda-avatar-imagen{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:50%;
+}
+
+
+.tienda-avatar-inicial{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:100%;
+
+    height:100%;
+
+    color:white;
+
+    font-size:1.8rem;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   TEXTOS
+   ========================================================= */
+
+.tienda-card h2{
+
+    color:#142B6F;
+
+    font-size:1.1rem;
+
+    margin-bottom:8px;
+}
+
+
+.tienda-card p{
+
+    min-height:55px;
+
+    color:#6d7280;
+
+    font-size:.9rem;
+
+    line-height:1.4;
+}
+
+
+.tienda-precio,
+.tienda-comprado{
+
+    display:block;
+
+    margin:
+        16px 0 12px;
+
+    font-weight:800;
+}
+
+
+.tienda-precio{
+
+    color:#7b1fd3;
+}
+
+
+.tienda-comprado{
+
+    color:#238642;
+}
+
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+
+.btn-tienda-comprar,
+.btn-tienda-equipar,
+.btn-tienda-equipado,
+.btn-tienda-sin-monedas,
+.btn-quitar-marco{
+
+    border:none;
+
+    border-radius:11px;
+
+    padding:
+        10px 16px;
+
+    font-weight:800;
+}
+
+
+.btn-tienda-comprar,
+.btn-tienda-equipar{
+
+    cursor:pointer;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7b1fd3,
+            #e91e83
+        );
+}
+
+
+.btn-tienda-equipado{
+
+    background:#e7f8ec;
+
+    color:#238642;
+}
+
+
+.btn-tienda-sin-monedas{
+
+    background:#edeef2;
+
+    color:#8c8f97;
+}
+
+
+.tienda-quitar-marco{
+
+    margin-top:25px;
+
+    text-align:center;
+}
+
+
+.btn-quitar-marco{
+
+    cursor:pointer;
+
+    background:#ececf2;
+
+    color:#555;
+}
+
+
+/* =========================================================
+   EQUIPADO
+   ========================================================= */
+
+.tienda-equipado-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-bottom:10px;
+
+    padding:
+        5px 10px;
+
+    border-radius:50px;
+
+    background:#e7f8ec;
+
+    color:#238642;
+
+    font-size:.75rem;
+
+    font-weight:800;
+}

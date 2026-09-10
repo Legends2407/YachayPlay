@@ -1,0 +1,365 @@
+/* =========================================================
+   DASHBOARD - TABLET
+   ========================================================= */
+
+@media (max-width:900px){
+
+    .sidebar{
+
+        width:82px;
+
+        min-width:82px;
+
+        padding-left:12px;
+
+        padding-right:12px;
+    }
+
+
+    .sidebar .logo{
+
+        width:0;
+
+        opacity:0;
+    }
+
+
+    .sidebar .btn-menu{
+
+        position:static;
+
+        margin:auto;
+    }
+
+
+    .sidebar .menu-texto{
+
+        display:none;
+    }
+
+
+    .sidebar .menu-titulo{
+
+        height:8px;
+
+        padding:0;
+    }
+
+
+    .sidebar li{
+
+        justify-content:center;
+
+        padding:
+            12px 8px;
+
+        gap:0;
+    }
+
+
+    .sidebar-footer{
+
+        justify-content:center;
+    }
+
+
+    #contenido{
+
+        margin:20px;
+
+        padding:25px;
+    }
+
+
+    .topbar{
+
+        padding:
+            0 20px;
+    }
+
+
+    .usuario-label{
+
+        display:none;
+    }
+}
+
+
+/* =========================================================
+   DASHBOARD - MÓVIL
+   ========================================================= */
+
+@media (max-width:650px){
+
+    .topbar{
+
+        min-height:70px;
+
+        gap:10px;
+
+        padding:
+            0 14px;
+    }
+
+
+    #tituloPagina{
+
+        font-size:1rem;
+    }
+
+
+    .user-info{
+
+        gap:8px;
+    }
+
+
+    .topbar-stat{
+
+        min-width:auto;
+
+        padding:7px;
+    }
+
+
+    .topbar-separador{
+
+        display:none;
+    }
+
+
+    .usuario-datos{
+
+        display:none;
+    }
+
+
+    .usuario-avatar{
+
+        width:34px;
+
+        height:34px;
+
+        min-width:34px;
+    }
+
+
+    #contenido{
+
+        margin:14px;
+
+        padding:20px;
+    }
+}
+
+
+/* =========================================================
+   RESULTADO
+   ========================================================= */
+
+@media (max-width:700px){
+
+    .resultado-leccion-mejorado{
+
+        padding:
+            26px 18px;
+    }
+
+
+    .resultado-rendimiento{
+
+        grid-template-columns:1fr;
+    }
+
+
+    .recompensas-mejoradas{
+
+        grid-template-columns:
+            repeat(3,1fr);
+
+        gap:7px;
+    }
+
+
+    .recompensa-card{
+
+        padding:
+            14px 6px;
+    }
+
+
+    .resultado-acciones{
+
+        flex-direction:column;
+    }
+
+
+    .btn-resultado{
+
+        width:100%;
+    }
+}
+
+
+/* =========================================================
+   TIENDA
+   ========================================================= */
+
+@media (max-width:1000px){
+
+    .tienda-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+}
+
+
+@media (max-width:600px){
+
+    .tienda-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+
+    .tienda-grid{
+
+        grid-template-columns:1fr;
+    }
+}
+
+
+/* =========================================================
+   LOGROS
+   ========================================================= */
+
+@media (max-width:850px){
+
+    .logros-grid{
+
+        grid-template-columns:1fr;
+    }
+}
+
+
+@media (max-width:600px){
+
+    .logros-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+
+    .logros-resumen{
+
+        width:100%;
+    }
+
+
+    .logro-card{
+
+        padding:18px;
+
+        gap:13px;
+    }
+
+
+    .logro-icono{
+
+        width:52px;
+
+        height:52px;
+
+        min-width:52px;
+
+        font-size:1.6rem;
+    }
+
+
+    .logro-cabecera{
+
+        flex-direction:column;
+    }
+}
+
+
+/* =========================================================
+   NOTIFICACIÓN LOGRO
+   ========================================================= */
+
+@media (max-width:600px){
+
+    .notificacion-logro{
+
+        top:75px;
+
+        right:15px;
+
+        left:15px;
+
+        width:auto;
+    }
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+@media (max-width:500px){
+
+    .modal-yachay{
+
+        padding:
+            26px 18px 22px;
+    }
+
+
+    .modal-yachay-acciones{
+
+        flex-direction:
+            column-reverse;
+    }
+
+
+    .modal-yachay-btn{
+
+        width:100%;
+    }
+}
+
+
+/* =========================================================
+   CELEBRACIÓN
+   ========================================================= */
+
+@media (max-width:600px){
+
+    .celebracion-yachay{
+
+        top:80px;
+
+        width:
+            calc(100vw - 30px);
+
+        padding:
+            16px 18px;
+    }
+
+
+    .celebracion-yachay-icono{
+
+        width:54px;
+
+        height:54px;
+
+        min-width:54px;
+
+        font-size:1.8rem;
+    }
+}

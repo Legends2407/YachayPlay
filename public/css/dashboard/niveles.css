@@ -1,0 +1,318 @@
+/* =========================================================
+   NIVELES
+   ========================================================= */
+
+.niveles-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(280px,1fr)
+        );
+
+    gap:25px;
+}
+
+
+.nivel-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.08);
+
+    transition:.3s;
+}
+
+
+.nivel-card:hover{
+
+    transform:
+        translateY(-5px);
+}
+
+
+.nivel-disponible{
+
+    border-left:
+        8px solid #2ECC71;
+}
+
+
+.nivel-bloqueado{
+
+    opacity:.6;
+}
+
+
+.info-nivel{
+
+    color:#666;
+
+    margin-top:8px;
+}
+
+
+/* =========================================================
+   BOTÓN DE NIVEL
+   ========================================================= */
+
+.btn-nivel{
+
+    margin-top:15px;
+
+    padding:
+        12px 24px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#E91E63;
+
+    color:white;
+
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+
+.btn-nivel:hover{
+
+    background:#C2185B;
+}
+
+
+/* =========================================================
+   LECCIONES DEL NIVEL
+   ========================================================= */
+
+.lecciones-grid{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+}
+
+
+.leccion-card{
+
+    background:#fff;
+
+    padding:
+        28px 32px;
+
+    border-radius:18px;
+
+    box-shadow:
+        0 4px 16px
+        rgba(0,0,0,.08);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+
+.leccion-card h2{
+
+    margin-bottom:8px;
+
+    color:#142B6F;
+}
+
+
+.leccion-disponible{
+
+    border-left:
+        8px solid #2ecc71;
+}
+
+
+.leccion-completada{
+
+    border-left:
+        8px solid #2ecc71;
+
+    background:#f3fff7;
+}
+
+
+.leccion-bloqueada{
+
+    border-left:
+        8px solid #e74c3c;
+
+    opacity:.65;
+}
+
+
+.leccion-card span{
+
+    display:inline-block;
+
+    margin-top:8px;
+
+    font-weight:700;
+
+    color:#666;
+}
+
+
+.leccion-card small{
+
+    display:block;
+
+    margin-top:6px;
+
+    color:#777;
+}
+
+
+/* =========================================================
+   PROGRESO DEL NIVEL
+   ========================================================= */
+
+.progreso-nivel{
+
+    margin:
+        20px 0 30px;
+}
+
+
+.progreso-nivel p{
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+    color:#142B6F;
+}
+
+
+.mini-progreso{
+
+    margin:15px 0;
+}
+
+
+.mini-barra{
+
+    width:100%;
+
+    height:10px;
+
+    background:#ddd;
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+
+.mini-barra-fill{
+
+    height:100%;
+
+    background:#2ecc71;
+}
+
+
+.mini-progreso span{
+
+    display:block;
+
+    margin-top:8px;
+
+    font-size:.9rem;
+
+    font-weight:600;
+
+    color:#666;
+}
+
+
+/* =========================================================
+   NIVEL DISPONIBLE PARA COMPRAR
+   ========================================================= */
+
+.nivel-comprable{
+
+    border-left:
+        8px solid #FFB703;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffdf5,
+            #fff8df
+        );
+
+    opacity:1;
+}
+
+
+.nivel-comprable:hover{
+
+    transform:
+        translateY(-5px);
+}
+
+
+/* =========================================================
+   BOTÓN DESBLOQUEAR
+   ========================================================= */
+
+.btn-desbloquear-nivel{
+
+    margin-top:15px;
+
+    padding:
+        12px 20px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #FFB703,
+            #FFCC24
+        );
+
+    color:#142B6F;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    box-shadow:
+        0 3px 10px
+        rgba(255,183,3,.25);
+}
+
+
+.btn-desbloquear-nivel:hover{
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 5px 14px
+        rgba(255,183,3,.38);
+}

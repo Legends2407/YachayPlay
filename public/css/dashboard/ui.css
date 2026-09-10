@@ -1,0 +1,1102 @@
+/* =========================================================
+   CONTENEDOR
+   ========================================================= */
+
+.contenido-wrapper{
+
+    position:relative;
+
+    flex:1;
+
+    width:100%;
+}
+
+
+/* =========================================================
+   BOTÓN REGRESAR
+   ========================================================= */
+
+.btn-regresar{
+
+    position:absolute;
+
+    top:-15px;
+
+    left:20px;
+
+    z-index:30;
+
+    width:56px;
+
+    height:42px;
+
+    border:none;
+
+    cursor:pointer;
+
+    background:transparent;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+    transform:
+        translateX(-4px);
+
+    transition:
+        opacity .2s ease,
+        visibility .2s ease,
+        transform .18s ease,
+        filter .18s ease;
+}
+
+
+.btn-regresar::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    clip-path:
+        polygon(
+            0 50%,
+            30% 10%,
+            30% 28%,
+            100% 28%,
+            100% 72%,
+            30% 72%,
+            30% 90%
+        );
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff4fa3,
+            #c65cff
+        );
+
+    filter:
+        drop-shadow(
+            0 4px 0 #4d0d82
+        )
+        drop-shadow(
+            0 8px 8px
+            rgba(0,0,0,.22)
+        );
+}
+
+
+.btn-regresar::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:4px;
+
+    clip-path:
+        polygon(
+            0 50%,
+            30% 10%,
+            30% 28%,
+            100% 28%,
+            100% 72%,
+            30% 72%,
+            30% 90%
+        );
+
+    background:
+        linear-gradient(
+            135deg,
+            #6b0fa8 0%,
+            #9d1ed4 50%,
+            #e91e83 100%
+        );
+}
+
+
+.btn-regresar.visible{
+
+    opacity:1;
+
+    visibility:visible;
+
+    pointer-events:auto;
+
+    transform:
+        translateX(0);
+}
+
+
+.btn-regresar:hover{
+
+    transform:
+        translateX(-3px)
+        translateY(-2px)
+        scale(1.04);
+}
+
+
+.btn-regresar:active{
+
+    transform:
+        translateX(-1px)
+        translateY(2px)
+        scale(.97);
+}
+
+
+/* =========================================================
+   NOTIFICACIÓN DE LOGRO
+   ========================================================= */
+
+.notificacion-logro{
+
+    position:fixed;
+
+    top:90px;
+
+    right:25px;
+
+    z-index:9999;
+
+    width:340px;
+
+    max-width:
+        calc(100vw - 30px);
+
+    padding:18px;
+
+    overflow:hidden;
+
+    border-radius:18px;
+
+    border:
+        2px solid #e56ac7;
+
+    background:
+        linear-gradient(
+            145deg,
+            #6d1bb5,
+            #9b22ce,
+            #db287f
+        );
+
+    color:white;
+
+    box-shadow:
+        0 7px 0 #4c1084,
+        0 15px 35px
+        rgba(73,15,127,.35);
+
+    opacity:0;
+
+    transform:
+        translateX(120%)
+        scale(.92);
+
+    transition:
+        opacity .35s ease,
+        transform .35s ease;
+
+    pointer-events:none;
+}
+
+
+.notificacion-logro.visible{
+
+    opacity:1;
+
+    transform:
+        translateX(0)
+        scale(1);
+}
+
+
+.notificacion-logro-brillo{
+
+    position:absolute;
+
+    top:-40px;
+
+    left:-60px;
+
+    width:120px;
+
+    height:160px;
+
+    background:
+        rgba(255,255,255,.16);
+
+    transform:
+        rotate(30deg);
+
+    filter:
+        blur(4px);
+}
+
+
+.notificacion-logro-titulo{
+
+    position:relative;
+
+    margin-bottom:12px;
+
+    color:#ffe783;
+
+    font-size:.78rem;
+
+    font-weight:900;
+
+    letter-spacing:1.2px;
+}
+
+
+.notificacion-logro-contenido{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+}
+
+
+.notificacion-logro-icono{
+
+    width:58px;
+
+    height:58px;
+
+    min-width:58px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:16px;
+
+    background:
+        rgba(255,255,255,.16);
+
+    border:
+        1px solid
+        rgba(255,255,255,.22);
+
+    font-size:2rem;
+
+    box-shadow:
+        inset 0 2px 4px
+        rgba(255,255,255,.16);
+}
+
+
+.notificacion-logro-contenido strong{
+
+    display:block;
+
+    margin-bottom:4px;
+
+    font-size:1.06rem;
+}
+
+
+.notificacion-logro-contenido p{
+
+    margin:0;
+
+    color:
+        rgba(255,255,255,.88);
+
+    font-size:.82rem;
+
+    line-height:1.35;
+}
+
+
+/* =========================================================
+   MODAL YACHAYPLAY
+   ========================================================= */
+
+.modal-yachay-abierto{
+
+    overflow:hidden;
+}
+
+
+.modal-yachay-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:20000;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        rgba(18,12,31,.60);
+
+    backdrop-filter:
+        blur(5px);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:
+        opacity .22s ease,
+        visibility .22s ease;
+}
+
+
+.modal-yachay-overlay.visible{
+
+    opacity:1;
+
+    visibility:visible;
+}
+
+
+.modal-yachay{
+
+    position:relative;
+
+    width:100%;
+
+    max-width:420px;
+
+    padding:
+        30px 28px 26px;
+
+    text-align:center;
+
+    border-radius:24px;
+
+    border:
+        2px solid
+        rgba(211,100,255,.55);
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #faf5ff
+        );
+
+    box-shadow:
+        0 8px 0 #6c1a97,
+        0 20px 50px
+        rgba(42,10,66,.34);
+
+    transform:
+        translateY(20px)
+        scale(.90);
+
+    transition:
+        transform .22s ease;
+}
+
+
+.modal-yachay-overlay.visible
+.modal-yachay{
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+.modal-yachay-icono{
+
+    width:74px;
+
+    height:74px;
+
+    margin:
+        -8px auto 17px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:22px;
+
+    font-size:2.5rem;
+
+    background:
+        linear-gradient(
+            145deg,
+            #7b1fd3,
+            #e91e83
+        );
+
+    box-shadow:
+        0 5px 0 #561080,
+        0 9px 18px
+        rgba(123,31,211,.28);
+}
+
+
+.modal-yachay-titulo{
+
+    margin:
+        0 0 10px;
+
+    color:#142B6F;
+
+    font-size:1.45rem;
+
+    font-weight:900;
+}
+
+
+.modal-yachay-mensaje{
+
+    margin:
+        0 auto 24px;
+
+    max-width:340px;
+
+    color:#606575;
+
+    font-size:.95rem;
+
+    line-height:1.55;
+
+    white-space:pre-line;
+}
+
+
+.modal-yachay-acciones{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:11px;
+}
+
+
+.modal-yachay-btn{
+
+    min-width:120px;
+
+    padding:
+        11px 18px;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-size:.9rem;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        filter .18s ease;
+}
+
+
+.modal-yachay-cancelar{
+
+    background:#eeeeF3;
+
+    color:#555b68;
+}
+
+
+.modal-yachay-cancelar:hover{
+
+    background:#e5e5ec;
+
+    transform:
+        translateY(-2px);
+}
+
+
+.modal-yachay-confirmar{
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7b1fd3,
+            #e91e83
+        );
+
+    box-shadow:
+        0 4px 0 #59128d;
+}
+
+
+.modal-yachay-confirmar:hover{
+
+    transform:
+        translateY(-2px);
+
+    filter:
+        brightness(1.07);
+
+    box-shadow:
+        0 6px 0 #59128d;
+}
+
+
+.modal-yachay-confirmar:active{
+
+    transform:
+        translateY(2px);
+
+    box-shadow:
+        0 2px 0 #59128d;
+}
+
+
+/* =========================================================
+   CELEBRACIÓN YACHAYPLAY
+   ========================================================= */
+
+.celebracion-yachay{
+
+    position:fixed;
+
+    top:100px;
+
+    left:50%;
+
+    z-index:25000;
+
+    width:380px;
+
+    max-width:
+        calc(100vw - 30px);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:
+        18px 22px;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    border:
+        2px solid
+        rgba(255,109,184,.65);
+
+    background:
+        linear-gradient(
+            135deg,
+            #6d1bb5,
+            #9c20cf,
+            #e42787
+        );
+
+    color:white;
+
+    box-shadow:
+        0 7px 0 #4d0e82,
+        0 18px 35px
+        rgba(82,18,126,.32);
+
+    opacity:0;
+
+    transform:
+        translate(-50%,-35px)
+        scale(.82);
+
+    pointer-events:none;
+
+    transition:
+        opacity .35s ease,
+        transform .35s ease;
+}
+
+
+.celebracion-yachay.visible{
+
+    opacity:1;
+
+    transform:
+        translate(-50%,0)
+        scale(1);
+}
+
+
+.celebracion-yachay.saliendo{
+
+    opacity:0;
+
+    transform:
+        translate(-50%,-20px)
+        scale(.92);
+}
+
+
+.celebracion-yachay-icono{
+
+    position:relative;
+
+    z-index:3;
+
+    width:62px;
+
+    height:62px;
+
+    min-width:62px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:18px;
+
+    background:
+        rgba(255,255,255,.17);
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    font-size:2.2rem;
+
+    box-shadow:
+        inset 0 2px 4px
+        rgba(255,255,255,.16);
+
+    animation:
+        celebracionIcono .7s ease;
+}
+
+
+.celebracion-yachay-texto{
+
+    position:relative;
+
+    z-index:3;
+
+    flex:1;
+}
+
+
+.celebracion-yachay-texto strong{
+
+    display:block;
+
+    margin-bottom:4px;
+
+    font-size:1.05rem;
+
+    font-weight:900;
+}
+
+
+.celebracion-yachay-texto p{
+
+    margin:0;
+
+    color:
+        rgba(255,255,255,.88);
+
+    font-size:.85rem;
+
+    line-height:1.4;
+
+    white-space:pre-line;
+}
+
+
+.celebracion-yachay-brillo{
+
+    position:absolute;
+
+    top:-70px;
+
+    left:-80px;
+
+    width:110px;
+
+    height:220px;
+
+    background:
+        rgba(255,255,255,.17);
+
+    transform:
+        rotate(30deg);
+
+    animation:
+        celebracionBrillo
+        1.3s ease forwards;
+}
+
+
+.celebracion-particulas span{
+
+    position:absolute;
+
+    z-index:2;
+
+    color:#ffe26f;
+
+    font-size:.85rem;
+
+    opacity:0;
+
+    animation:
+        particulaYachay
+        1.3s ease forwards;
+}
+
+
+.celebracion-particulas span:nth-child(1){
+    top:10px;
+    left:18px;
+    animation-delay:.1s;
+}
+
+.celebracion-particulas span:nth-child(2){
+    top:15px;
+    right:30px;
+    animation-delay:.2s;
+}
+
+.celebracion-particulas span:nth-child(3){
+    bottom:12px;
+    left:100px;
+    animation-delay:.15s;
+}
+
+.celebracion-particulas span:nth-child(4){
+    bottom:18px;
+    right:45px;
+    animation-delay:.3s;
+}
+
+.celebracion-particulas span:nth-child(5){
+    top:8px;
+    left:55%;
+    animation-delay:.35s;
+}
+
+.celebracion-particulas span:nth-child(6){
+    bottom:7px;
+    left:45%;
+    animation-delay:.25s;
+}
+
+
+@keyframes celebracionIcono{
+
+    0%{
+        transform:
+            rotate(-15deg)
+            scale(.4);
+    }
+
+    55%{
+        transform:
+            rotate(8deg)
+            scale(1.15);
+    }
+
+    100%{
+        transform:
+            rotate(0)
+            scale(1);
+    }
+}
+
+
+@keyframes celebracionBrillo{
+
+    from{
+        transform:
+            translateX(-30px)
+            rotate(30deg);
+    }
+
+    to{
+        transform:
+            translateX(500px)
+            rotate(30deg);
+    }
+}
+
+
+@keyframes particulaYachay{
+
+    0%{
+        opacity:0;
+
+        transform:
+            translateY(15px)
+            scale(.4);
+    }
+
+    40%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+
+        transform:
+            translateY(-25px)
+            scale(1.3);
+    }
+}
+
+
+/* =========================================================
+   CONFETI
+   ========================================================= */
+
+.confeti-yachay{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:24000;
+
+    overflow:hidden;
+
+    pointer-events:none;
+}
+
+
+.confeti-particula{
+
+    position:absolute;
+
+    top:-30px;
+
+    display:block;
+
+    border-radius:2px;
+
+    opacity:1;
+
+    animation-name:
+        caerConfetiYachay;
+
+    animation-timing-function:
+        cubic-bezier(
+            .15,
+            .65,
+            .35,
+            1
+        );
+
+    animation-fill-mode:
+        forwards;
+
+    box-shadow:
+        0 2px 3px
+        rgba(0,0,0,.12);
+}
+
+
+.confeti-redondo{
+
+    border-radius:50%;
+}
+
+
+@keyframes caerConfetiYachay{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+            translate3d(
+                0,
+                -40px,
+                0
+            )
+            rotate(0deg);
+    }
+
+    8%{
+
+        opacity:1;
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+            translate3d(
+                var(--movimiento-x),
+                110vh,
+                0
+            )
+            rotate(
+                var(--rotacion)
+            );
+    }
+}
+
+
+/* =========================================================
+   EFECTO COMPRA
+   ========================================================= */
+
+.efecto-compra-yachay{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:26000;
+
+    pointer-events:none;
+
+    overflow:hidden;
+}
+
+
+.particula-compra-yachay{
+
+    position:fixed;
+
+    z-index:26001;
+
+    display:block;
+
+    pointer-events:none;
+
+    transform:
+        translate(-50%,-50%);
+
+    opacity:0;
+
+    filter:
+        drop-shadow(
+            0 3px 3px
+            rgba(0,0,0,.20)
+        );
+
+    animation:
+        explotarCompraYachay
+        1.25s
+        cubic-bezier(
+            .15,
+            .7,
+            .25,
+            1
+        )
+        forwards;
+}
+
+
+@keyframes explotarCompraYachay{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+            translate(-50%,-50%)
+            scale(.25)
+            rotate(0deg);
+    }
+
+    12%{
+
+        opacity:1;
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.15)
+            rotate(15deg);
+    }
+
+    65%{
+
+        opacity:1;
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+            translate(
+                calc(
+                    -50% +
+                    var(--compra-x)
+                ),
+                calc(
+                    -50% +
+                    var(--compra-y)
+                )
+            )
+            scale(.75)
+            rotate(
+                var(--compra-rotacion)
+            );
+    }
+}
+
+
+.boton-compra-celebrando{
+
+    animation:
+        botonCompraYachay
+        .65s ease !important;
+}
+
+
+@keyframes botonCompraYachay{
+
+    0%{
+        transform:scale(1);
+    }
+
+    30%{
+        transform:scale(.92);
+    }
+
+    55%{
+        transform:scale(1.10);
+    }
+
+    75%{
+        transform:scale(.98);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}

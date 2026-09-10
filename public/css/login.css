@@ -1,0 +1,309 @@
+body{
+    margin:0;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:url("../assets/fondo-home.png") center center / cover no-repeat;
+
+    font-family:'Segoe UI',sans-serif;
+
+    position:relative;
+    overflow:hidden;
+}
+
+body::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:rgba(255,255,255,.35);
+    backdrop-filter:blur(10px);
+
+    z-index:0;
+}
+
+.login-card{
+    position:relative;
+    top:50px;
+    width:400px;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    position:relative;
+    z-index:1;
+}
+
+h1{
+    text-align:center;
+    color:#142B6F;
+}
+
+form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+input{
+    padding:15px;
+    border:2px solid #ddd;
+    border-radius:12px;
+}
+
+button{
+    background:#E91E63;
+    color:white;
+    border:none;
+    padding:15px;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+.condor-login{
+    position:absolute; 
+    width:400px;
+    top:-155px; 
+    left:50%; 
+    transform:translateX(-50%);
+}
+
+/* =========================================================
+   FLECHA REGRESAR - LOGIN / REGISTRO
+   ========================================================= */
+
+.btn-regresar-auth{
+
+    position:absolute;
+
+    top:20px;
+    left:20px;
+
+    z-index:50;
+
+    width:56px;
+    height:42px;
+
+    background:transparent;
+
+    text-decoration:none;
+
+    cursor:pointer;
+
+    transition:
+        transform .18s ease,
+        filter .18s ease;
+}
+
+
+/* BORDE */
+
+.btn-regresar-auth::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    clip-path:polygon(
+        0 50%,
+        30% 10%,
+        30% 28%,
+        100% 28%,
+        100% 72%,
+        30% 72%,
+        30% 90%
+    );
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff4fa3,
+            #c65cff
+        );
+
+    filter:
+        drop-shadow(
+            0 4px 0 #4d0d82
+        )
+        drop-shadow(
+            0 8px 8px rgba(0,0,0,.22)
+        );
+}
+
+
+/* INTERIOR */
+
+.btn-regresar-auth::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:3px;
+
+    clip-path:polygon(
+        0 50%,
+        30% 10%,
+        30% 28%,
+        100% 28%,
+        100% 72%,
+        30% 72%,
+        30% 90%
+    );
+
+    background:
+        linear-gradient(
+            135deg,
+            #6b0fa8 0%,
+            #9d1ed4 50%,
+            #e91e83 100%
+        );
+}
+
+
+/* HOVER */
+
+.btn-regresar-auth:hover{
+
+    transform:
+        translateX(-3px)
+        translateY(-2px)
+        scale(1.04);
+}
+
+
+/* CLICK */
+
+.btn-regresar-auth:active{
+
+    transform:
+        translateX(-1px)
+        translateY(2px)
+        scale(.97);
+}
+
+/* =========================================================
+   VALIDACIÓN DE LOGIN
+   ========================================================= */
+
+.login-card input{
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        transform .2s ease;
+}
+
+
+/* CAMPO CON ERROR */
+
+.login-card input.campo-error{
+
+    border:2px solid #e53935;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(229,57,53,.12);
+
+    animation:
+        sacudirCampo .25s ease;
+}
+
+
+/* MENSAJE DE ERROR DEBAJO DEL CAMPO */
+
+.mensaje-error-campo{
+
+    display:block;
+
+    width:100%;
+
+    min-height:18px;
+
+    margin-top:5px;
+
+    margin-bottom:5px;
+
+    color:#e53935;
+
+    font-size:.78rem;
+
+    font-weight:600;
+
+    line-height:1.3;
+
+    text-align:left;
+}
+
+
+/* ERROR DEL BOTÓN DE GOOGLE */
+
+.mensaje-error-google{
+
+    display:block;
+
+    width:100%;
+
+    min-height:18px;
+
+    margin-top:7px;
+
+    color:#e53935;
+
+    font-size:.78rem;
+
+    font-weight:600;
+
+    text-align:center;
+}
+
+
+/* ANIMACIÓN CUANDO HAY ERROR */
+
+@keyframes sacudirCampo{
+
+    0%{
+        transform:translateX(0);
+    }
+
+    25%{
+        transform:translateX(-4px);
+    }
+
+    50%{
+        transform:translateX(4px);
+    }
+
+    75%{
+        transform:translateX(-2px);
+    }
+
+    100%{
+        transform:translateX(0);
+    }
+}
+
+
+/* CUANDO EL USUARIO VUELVE A SELECCIONAR EL INPUT */
+
+.login-card input:focus{
+
+    outline:none;
+}
+
+
+/* EVITAR QUE EL MENSAJE CAMBIE MUCHO
+   LA ALTURA DEL FORMULARIO */
+
+#googleBtnDiv{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    margin-top:10px;
+}

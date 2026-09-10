@@ -1,0 +1,292 @@
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    background-color:#FFF8E7;
+    color:#333;
+}
+
+/* NAVBAR */
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background: linear-gradient(
+        90deg,
+        #8A2BE2,
+        #C2185B
+    );
+
+    padding:0px 40px;
+}
+
+.logo img{
+    width:200px;
+}
+
+/* =========================================================
+   FRASE DEL HEADER
+   ========================================================= */
+
+.frase-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    color:white;
+
+    font-size:1.05rem;
+
+    font-weight:700;
+
+    letter-spacing:.4px;
+
+    white-space:nowrap;
+
+    animation:
+        entradaFrase .8s ease;
+}
+
+
+/* PUNTOS */
+
+.frase-header span{
+
+    color:#FFB703;
+
+    font-size:1.15rem;
+
+    font-weight:900;
+}
+
+
+/* =========================================================
+   ANIMACIÓN DE ENTRADA
+   ========================================================= */
+
+@keyframes entradaFrase{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(-8px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+.auth-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.login-btn{
+    padding:10px 20px;
+
+    border:none;
+
+    background:#FFB703;
+    color:white;
+
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.register-btn{
+    padding:10px 20px;
+
+    border:2px solid #219EBC;
+
+    background:white;
+    color:#219EBC;
+
+    border-radius:10px;
+    cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+    background-image:url("../assets/fondo-home.png");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:60px 80px;
+
+    min-height:550px;
+}
+
+.hero-content{
+    max-width:600px;
+}
+
+.hero-content span{
+    color:#E91E63;
+}
+
+.hero-content h1{
+    font-size:4.5rem;
+    line-height:1.1;
+    margin-bottom:20px;
+
+    color:#142B6F;
+}
+
+.hero-content p{
+    font-size:1.2rem;
+    line-height:1.8;
+    margin-bottom:30px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:15px;
+}
+
+.btn-primary{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8A2BE2,
+            #C2185B,
+            #E91E63
+        );
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:15px 30px;
+
+    border-radius:14px;
+
+    font-size:1rem;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 5px 0 #6d1b8f,
+        0 10px 20px rgba(138,43,226,.25);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        filter .2s ease;
+}
+
+
+/* HOVER */
+
+.btn-primary:hover{
+
+    transform:
+        translateY(-4px)
+        scale(1.03);
+
+    filter:
+        brightness(1.08);
+
+    box-shadow:
+        0 8px 0 #6d1b8f,
+        0 15px 25px rgba(138,43,226,.32);
+}
+
+
+/* CLICK */
+
+.btn-primary:active{
+
+    transform:
+        translateY(2px)
+        scale(.98);
+
+    box-shadow:
+        0 2px 0 #6d1b8f,
+        0 5px 10px rgba(138,43,226,.20);
+}
+
+.secondary-btn{
+    background:white;
+
+    border:2px solid #219EBC;
+
+    color:#219EBC;
+
+    padding:15px 30px;
+
+    border-radius:12px;
+
+    font-size:1rem;
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.hero-image img{
+    width:550px;
+}
+
+.features{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+
+    margin-top:-60px;
+
+    padding:0 40px;
+}
+
+.card{
+    background:white;
+
+    width:350px;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}

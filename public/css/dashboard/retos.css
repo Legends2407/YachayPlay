@@ -1,0 +1,326 @@
+/* =========================================================
+   RETOS DIARIOS
+   ========================================================= */
+
+.retos-pagina{
+
+    max-width:1000px;
+
+    margin:
+        0 auto;
+}
+
+
+.retos-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    margin-bottom:28px;
+}
+
+
+.retos-header h1{
+
+    margin-bottom:7px;
+
+    color:#142B6F;
+}
+
+
+.retos-header p{
+
+    color:#6d7280;
+}
+
+
+.retos-resumen{
+
+    padding:
+        10px 17px;
+
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7b1fd3,
+            #e91e83
+        );
+
+    color:white;
+
+    font-weight:800;
+
+    white-space:nowrap;
+}
+
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.retos-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    gap:18px;
+}
+
+
+/* =========================================================
+   TARJETA
+   ========================================================= */
+
+.reto-card{
+
+    padding:24px;
+
+    border-radius:20px;
+
+    background:white;
+
+    border:
+        1px solid #ebe6f1;
+
+    box-shadow:
+        0 5px 16px
+        rgba(0,0,0,.08);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+
+.reto-card:hover{
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 9px 22px
+        rgba(0,0,0,.11);
+}
+
+
+.reto-completado{
+
+    border-color:#b05de5;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #fbf5ff
+        );
+}
+
+
+.reto-reclamado{
+
+    opacity:.82;
+}
+
+
+/* =========================================================
+   INFORMACIÓN
+   ========================================================= */
+
+.reto-info h2{
+
+    margin-bottom:7px;
+
+    color:#142B6F;
+
+    font-size:1.2rem;
+}
+
+
+.reto-info p{
+
+    color:#6d7280;
+
+    line-height:1.45;
+}
+
+
+/* =========================================================
+   PROGRESO
+   ========================================================= */
+
+.reto-progreso-texto{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin:
+        20px 0 7px;
+
+    color:#555;
+}
+
+
+.reto-progreso-texto strong{
+
+    color:#7b1fd3;
+}
+
+
+.reto-barra{
+
+    width:100%;
+
+    height:11px;
+
+    overflow:hidden;
+
+    border-radius:50px;
+
+    background:#eee9f2;
+}
+
+
+.reto-barra-fill{
+
+    height:100%;
+
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7b1fd3,
+            #e91e83
+        );
+
+    transition:
+        width .45s ease;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.reto-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-top:18px;
+}
+
+
+.reto-recompensa{
+
+    color:#6b0fa8;
+
+    font-weight:800;
+}
+
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+
+.btn-reclamar-reto,
+.btn-reto-pendiente,
+.btn-reto-reclamado{
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:
+        10px 17px;
+
+    font-weight:800;
+}
+
+
+.btn-reclamar-reto{
+
+    color:white;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7b1fd3,
+            #e91e83
+        );
+
+    box-shadow:
+        0 4px 0 #57118f;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease;
+}
+
+
+.btn-reclamar-reto:hover{
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 6px 0 #57118f;
+}
+
+
+.btn-reclamar-reto:active{
+
+    transform:
+        translateY(2px);
+
+    box-shadow:
+        0 2px 0 #57118f;
+}
+
+
+.btn-reto-pendiente{
+
+    background:#edeef2;
+
+    color:#8b8e98;
+}
+
+
+.btn-reto-reclamado{
+
+    background:#e7f8ec;
+
+    color:#238642;
+}
+
+
+/* =========================================================
+   CARGANDO / ERROR
+   ========================================================= */
+
+.retos-cargando,
+.retos-error{
+
+    padding:35px;
+
+    text-align:center;
+
+    font-weight:700;
+}
