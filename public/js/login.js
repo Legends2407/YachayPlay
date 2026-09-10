@@ -878,3 +878,91 @@ window.addEventListener(
     "pageshow",
     habilitarCamposLogin
 );
+
+/* =========================================================
+   EVITAR CONTRASEÑA AUTORRELLENADA
+   ========================================================= */
+
+function limpiarPasswordLogin() {
+
+    const inputPassword =
+        document.getElementById(
+            "password"
+        );
+
+
+    if (!inputPassword) {
+
+        return;
+    }
+
+
+    /*
+    No elimina la contraseña guardada
+    en Chrome/Edge.
+
+    Solo vacía visualmente el campo.
+    */
+
+    inputPassword.value =
+        "";
+
+
+    inputPassword.disabled =
+        false;
+
+
+    inputPassword.readOnly =
+        false;
+}
+
+
+/* =========================================================
+   AL ABRIR LOGIN
+   ========================================================= */
+
+window.addEventListener(
+    "load",
+    () => {
+
+        limpiarPasswordLogin();
+
+
+        /*
+        Algunos gestores rellenan el campo
+        unos milisegundos después.
+        */
+
+        setTimeout(
+            limpiarPasswordLogin,
+            100
+        );
+
+
+        setTimeout(
+            limpiarPasswordLogin,
+            400
+        );
+
+    }
+);
+
+
+/* =========================================================
+   AL VOLVER DESDE DASHBOARD
+   ========================================================= */
+
+window.addEventListener(
+    "pageshow",
+    () => {
+
+        limpiarPasswordLogin();
+
+
+        setTimeout(
+            limpiarPasswordLogin,
+            100
+        );
+
+    }
+);
