@@ -937,3 +937,212 @@
             translateY(0);
     }
 }
+
+/* =========================================================
+   BOTÓN MANTENER PRESIONADO PARA HABLAR
+   ========================================================= */
+
+.btn-hablar-presionado{
+
+    min-width:250px;
+
+    user-select:none;
+
+    -webkit-user-select:none;
+
+    touch-action:none;
+
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease,
+        background .2s ease;
+}
+
+
+/* =========================================================
+   GRABANDO
+   ========================================================= */
+
+.btn-hablar-presionado.grabando{
+
+    background:
+        linear-gradient(
+            135deg,
+            #e53935,
+            #e91e63
+        );
+
+    color:white;
+
+    transform:
+        scale(.97);
+
+    box-shadow:
+        0 0 0 5px
+        rgba(233,30,99,.15);
+
+    animation:
+        pulsoMicrofono
+        .8s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   ANALIZANDO
+   ========================================================= */
+
+.btn-hablar-presionado.analizando{
+
+    background:#FFB703;
+
+    color:#142B6F;
+
+    cursor:wait;
+
+    animation:none;
+
+    transform:scale(.98);
+}
+
+
+/* =========================================================
+   PULSO DEL MICRÓFONO
+   ========================================================= */
+
+@keyframes pulsoMicrofono{
+
+    0%{
+
+        box-shadow:
+            0 0 0 0
+            rgba(229,57,53,.55);
+    }
+
+    70%{
+
+        box-shadow:
+            0 0 0 13px
+            rgba(229,57,53,0);
+    }
+
+    100%{
+
+        box-shadow:
+            0 0 0 0
+            rgba(229,57,53,0);
+    }
+}
+
+
+/* =========================================================
+   ANALIZANDO VOZ
+   ========================================================= */
+
+.analizando-voz-box{
+
+    margin-top:20px;
+
+    padding:18px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    background:#fff5d6;
+
+    color:#142B6F;
+}
+
+
+.analizando-voz-box strong{
+
+    display:block;
+
+    margin-bottom:6px;
+}
+
+
+.analizando-voz-box p{
+
+    margin:0;
+
+    color:#6d7280;
+
+    font-size:.9rem;
+}
+
+
+/* =========================================================
+   ERROR DE VOZ
+   ========================================================= */
+
+.mensaje-voz-error{
+
+    padding:16px;
+
+    border-radius:14px;
+
+    background:#fff0f0;
+
+    border:
+        1px solid #ffd0d0;
+
+    color:#555;
+}
+
+
+.mensaje-voz-error strong{
+
+    display:block;
+
+    margin-bottom:6px;
+
+    color:#d83a3a;
+}
+
+
+.mensaje-voz-error p{
+
+    margin:0;
+
+    font-size:.9rem;
+
+    line-height:1.4;
+}
+
+/* =========================================================
+   MICRÓFONO - MODO OSCURO
+   ========================================================= */
+
+body.modo-oscuro
+.analizando-voz-box{
+
+    background:#3b3421;
+
+    color:#ffe7a3;
+}
+
+
+body.modo-oscuro
+.analizando-voz-box p{
+
+    color:#d9cda6;
+}
+
+
+body.modo-oscuro
+.mensaje-voz-error{
+
+    background:#3f2428;
+
+    border-color:#65333a;
+
+    color:#e8edf5;
+}
+
+
+body.modo-oscuro
+.mensaje-voz-error strong{
+
+    color:#ff8585;
+}

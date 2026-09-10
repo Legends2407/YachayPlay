@@ -274,11 +274,35 @@ function mostrarPracticaPronunciacion() {
 
 
                 <button
-                    class="btn-nivel"
-                    onclick="iniciarReconocimientoVozLeccion()"
+                    class="btn-nivel btn-hablar-presionado"
+                    id="btnHablarPronunciacion"
+                    type="button"
+
+                    onpointerdown="
+                        iniciarReconocimientoVozLeccion(
+                            this,
+                            event
+                        )
+                    "
+
+                    onpointerup="
+                        detenerReconocimientoVozLeccion(
+                            this,
+                            event
+                        )
+                    "
+
+                    onpointercancel="
+                        detenerReconocimientoVozLeccion(
+                            this,
+                            event
+                        )
+                    "
+
+                    oncontextmenu="return false;"
                 >
 
-                    🎙️ Hablar ahora
+                    🎙️ Mantén presionado para hablar
 
                 </button>
 
@@ -309,9 +333,9 @@ function mostrarPracticaPronunciacion() {
 
                 "escuchando",
 
-                "Estoy escuchando",
+                "Practiquemos juntos",
 
-                `Repite con calma: ${leccion.frase}`
+                `Mantén presionado el botón mientras pronuncias: ${leccion.frase}`
 
             )}
 
@@ -325,68 +349,290 @@ function mostrarPracticaPronunciacion() {
    RECONOCIMIENTO DE VOZ
    ========================================================= */
 
-function iniciarReconocimientoVozLeccion() {
+/* =========================================================
+   RECONOCIMIENTO DE VOZ
+   MANTENER PRESIONADO PARA HABLAR
+   ========================================================= */
+
+let reconocimientoVozLeccion =
+    null;
+
+let reconocimientoVozActivo =
+    false;
+
+let reconocimientoVozIniciado =
+    false;
+
+let reconocimientoVozDebeDetenerse =
+    false;
+
+let reconocimientoVozTuvoResultado =
+    false;
+
+let reconocimientoVozTuvoError =
+    false;
+
+let botonVozActual =
+    null;
+
+
+/* =========================================================
+   EMPEZAR A ESCUCHAR
+   ========================================================= */
+
+function iniciarReconocimientoVozLeccion(
+    boton,
+    evento
+) {
+
+    /* =====================================================
+       EVITAR DOS RECONOCIMIENTOS AL MISMO TIEMPO
+       ===================================================== */
+
+    if (reconocimientoVozActivo) {
+
+        return;
+    }
+
 
     const SpeechRecognition =
 
         window.SpeechRecognition ||
-
         window.webkitSpeechRecognition;
 
 
-    const reconocimiento =
+    /* =====================================================
+       NAVEGADOR NO COMPATIBLE
+       ===================================================== */
+
+    if (!SpeechRecognition) {
+
+        const resultado =
+            document.getElementById(
+                "resultadoPronunciacion"
+            );
+
+
+        if (resultado) {
+
+            resultado.innerHTML = `
+
+                <div class="mensaje-voz-error">
+
+                    <strong>
+                        🎙️ Reconocimiento no disponible
+                    </strong>
+
+                    <p>
+                        Tu navegador no permite
+                        reconocimiento de voz.
+                        Prueba con Chrome o Edge.
+                    </p>
+
+                </div>
+            `;
+        }
+
+
+        return;
+    }
+
+
+    /* =====================================================
+       CAPTURAR EL PUNTERO
+
+       Así, aunque el dedo/mouse se mueva un poco fuera
+       del botón, detectamos cuando el usuario lo suelta.
+       ===================================================== */
+
+    if (
+        evento &&
+        boton &&
+        boton.setPointerCapture
+    ) {
+
+        try {
+
+            boton.setPointerCapture(
+                evento.pointerId
+            );
+
+        } catch (error) {
+
+            console.warn(
+                "No se pudo capturar el puntero:",
+                error
+            );
+        }
+    }
+
+
+    /* =====================================================
+       CREAR RECONOCIMIENTO
+       ===================================================== */
+
+    reconocimientoVozLeccion =
         new SpeechRecognition();
 
 
-    reconocimiento.lang =
+    reconocimientoVozLeccion.lang =
         "es-EC";
 
 
-    reconocimiento.interimResults =
+    reconocimientoVozLeccion.continuous =
         false;
 
 
-    reconocimiento.maxAlternatives =
+    reconocimientoVozLeccion.interimResults =
+        false;
+
+
+    reconocimientoVozLeccion.maxAlternatives =
         1;
 
 
-    document.getElementById(
-        "resultadoPronunciacion"
-    ).innerHTML = `
+    /* =====================================================
+       ESTADO
+       ===================================================== */
 
-        <div class="escuchando-box">
+    reconocimientoVozActivo =
+        true;
 
-            <p>
 
-                🎙️ Kuntur está escuchando...
+    reconocimientoVozIniciado =
+        false;
 
-            </p>
 
-            <div class="ondas-audio">
+    reconocimientoVozDebeDetenerse =
+        false;
 
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+
+    reconocimientoVozTuvoResultado =
+        false;
+
+
+    reconocimientoVozTuvoError =
+        false;
+
+
+    botonVozActual =
+        boton;
+
+
+    /* =====================================================
+       VISUAL DEL BOTÓN
+       ===================================================== */
+
+    if (boton) {
+
+        boton.classList.remove(
+            "analizando"
+        );
+
+
+        boton.classList.add(
+            "grabando"
+        );
+
+
+        boton.textContent =
+            "🔴 Suelta para terminar";
+    }
+
+
+    /* =====================================================
+       MENSAJE ESCUCHANDO
+       ===================================================== */
+
+    const resultado =
+        document.getElementById(
+            "resultadoPronunciacion"
+        );
+
+
+    if (resultado) {
+
+        resultado.innerHTML = `
+
+            <div class="escuchando-box">
+
+                <p>
+                    🎙️ Kuntur está escuchando...
+                </p>
+
+                <small>
+                    Habla mientras mantienes
+                    presionado el botón.
+                </small>
+
+                <div class="ondas-audio">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
 
             </div>
-
-        </div>
-    `;
-
-
-    reconocimiento.start();
+        `;
+    }
 
 
-    reconocimiento.onresult =
+    /* =====================================================
+       CUANDO EL NAVEGADOR EMPIEZA REALMENTE
+       ===================================================== */
+
+    reconocimientoVozLeccion.onstart =
+        () => {
+
+            reconocimientoVozIniciado =
+                true;
+
+
+            /*
+            Puede ocurrir que el usuario suelte
+            demasiado rápido, incluso antes de que
+            SpeechRecognition termine de arrancar.
+            */
+
+            if (
+                reconocimientoVozDebeDetenerse
+            ) {
+
+                try {
+
+                    reconocimientoVozLeccion.stop();
+
+                } catch (error) {
+
+                    console.warn(
+                        "No se pudo detener el reconocimiento:",
+                        error
+                    );
+                }
+            }
+        };
+
+
+    /* =====================================================
+       RESULTADO
+       ===================================================== */
+
+    reconocimientoVozLeccion.onresult =
         event => {
+
+            reconocimientoVozTuvoResultado =
+                true;
+
 
             const textoReconocido =
 
                 event
                     .results[0][0]
                     .transcript
-                    .toLowerCase();
+                    .toLowerCase()
+                    .trim();
 
 
             evaluarPronunciacionLeccion(
@@ -395,21 +641,377 @@ function iniciarReconocimientoVozLeccion() {
         };
 
 
-    reconocimiento.onerror =
-        () => {
+    /* =====================================================
+       ERROR
+       ===================================================== */
 
-            document.getElementById(
-                "resultadoPronunciacion"
-            ).innerHTML = `
+    reconocimientoVozLeccion.onerror =
+        event => {
 
-                <p>
 
-                    No se pudo escuchar bien.
-                    Intenta otra vez.
+            /*
+            Algunos navegadores pueden generar
+            "aborted" al finalizar manualmente.
+            No lo tratamos como error.
+            */
 
-                </p>
+            if (
+                event.error ===
+                "aborted"
+            ) {
+
+                return;
+            }
+
+
+            reconocimientoVozTuvoError =
+                true;
+
+
+            const resultado =
+                document.getElementById(
+                    "resultadoPronunciacion"
+                );
+
+
+            if (!resultado) {
+
+                return;
+            }
+
+
+            /* PERMISO DENEGADO */
+
+            if (
+                event.error ===
+                "not-allowed"
+            ) {
+
+                resultado.innerHTML = `
+
+                    <div class="mensaje-voz-error">
+
+                        <strong>
+                            🎙️ Permiso de micrófono
+                        </strong>
+
+                        <p>
+                            Debes permitir el acceso
+                            al micrófono para practicar
+                            la pronunciación.
+                        </p>
+
+                    </div>
+                `;
+
+
+                return;
+            }
+
+
+            /* NO ESCUCHÓ NADA */
+
+            if (
+                event.error ===
+                "no-speech"
+            ) {
+
+                resultado.innerHTML = `
+
+                    <div class="mensaje-voz-error">
+
+                        <strong>
+                            No alcancé a escucharte
+                        </strong>
+
+                        <p>
+                            Mantén presionado el botón,
+                            pronuncia la frase y luego
+                            suéltalo.
+                        </p>
+
+                    </div>
+                `;
+
+
+                return;
+            }
+
+
+            /* OTRO ERROR */
+
+            resultado.innerHTML = `
+
+                <div class="mensaje-voz-error">
+
+                    <strong>
+                        No pude escucharte bien
+                    </strong>
+
+                    <p>
+                        Intenta nuevamente.
+                    </p>
+
+                </div>
             `;
         };
+
+
+    /* =====================================================
+       FINALIZACIÓN
+       ===================================================== */
+
+    reconocimientoVozLeccion.onend =
+        () => {
+
+            reconocimientoVozActivo =
+                false;
+
+
+            reconocimientoVozIniciado =
+                false;
+
+
+            reconocimientoVozDebeDetenerse =
+                false;
+
+
+            /* =============================================
+               RESTAURAR BOTÓN
+               ============================================= */
+
+            if (botonVozActual) {
+
+                botonVozActual.classList.remove(
+                    "grabando",
+                    "analizando"
+                );
+
+
+                botonVozActual.textContent =
+                    "🎙️ Mantén presionado para hablar";
+            }
+
+
+            /* =============================================
+               SI NO HUBO RESULTADO NI ERROR
+               ============================================= */
+
+            if (
+                !reconocimientoVozTuvoResultado &&
+                !reconocimientoVozTuvoError
+            ) {
+
+                const resultado =
+                    document.getElementById(
+                        "resultadoPronunciacion"
+                    );
+
+
+                if (resultado) {
+
+                    resultado.innerHTML = `
+
+                        <div class="mensaje-voz-error">
+
+                            <strong>
+                                No detecté una frase
+                            </strong>
+
+                            <p>
+                                Mantén presionado un poco
+                                más mientras hablas.
+                            </p>
+
+                        </div>
+                    `;
+                }
+            }
+
+
+            reconocimientoVozLeccion =
+                null;
+
+
+            botonVozActual =
+                null;
+        };
+
+
+    /* =====================================================
+       INICIAR
+       ===================================================== */
+
+    try {
+
+        reconocimientoVozLeccion.start();
+
+    } catch (error) {
+
+        console.error(
+            "Error iniciando reconocimiento:",
+            error
+        );
+
+
+        reconocimientoVozActivo =
+            false;
+
+
+        reconocimientoVozLeccion =
+            null;
+
+
+        if (boton) {
+
+            boton.classList.remove(
+                "grabando",
+                "analizando"
+            );
+
+
+            boton.textContent =
+                "🎙️ Mantén presionado para hablar";
+        }
+    }
+}
+
+
+/* =========================================================
+   DEJAR DE ESCUCHAR AL SOLTAR
+   ========================================================= */
+
+function detenerReconocimientoVozLeccion(
+    boton,
+    evento
+) {
+
+    if (
+        !reconocimientoVozActivo ||
+        !reconocimientoVozLeccion
+    ) {
+
+        return;
+    }
+
+
+    /*
+    Evitar llamar stop() varias veces
+    por eventos repetidos.
+    */
+
+    if (
+        reconocimientoVozDebeDetenerse
+    ) {
+
+        return;
+    }
+
+
+    reconocimientoVozDebeDetenerse =
+        true;
+
+
+    /* =====================================================
+       SOLTAR CAPTURA DEL PUNTERO
+       ===================================================== */
+
+    if (
+        evento &&
+        boton &&
+        boton.releasePointerCapture &&
+        boton.hasPointerCapture &&
+        boton.hasPointerCapture(
+            evento.pointerId
+        )
+    ) {
+
+        try {
+
+            boton.releasePointerCapture(
+                evento.pointerId
+            );
+
+        } catch (error) {
+
+            console.warn(
+                "No se pudo liberar el puntero:",
+                error
+            );
+        }
+    }
+
+
+    /* =====================================================
+       VISUAL: ANALIZANDO
+       ===================================================== */
+
+    if (boton) {
+
+        boton.classList.remove(
+            "grabando"
+        );
+
+
+        boton.classList.add(
+            "analizando"
+        );
+
+
+        boton.textContent =
+            "⏳ Analizando...";
+    }
+
+
+    const resultado =
+        document.getElementById(
+            "resultadoPronunciacion"
+        );
+
+
+    if (resultado) {
+
+        resultado.innerHTML = `
+
+            <div class="analizando-voz-box">
+
+                <strong>
+                    ⏳ Analizando pronunciación...
+                </strong>
+
+                <p>
+                    Kuntur está comparando
+                    lo que dijiste.
+                </p>
+
+            </div>
+        `;
+    }
+
+
+    /* =====================================================
+       DETENER
+
+       Si SpeechRecognition todavía no terminó de
+       iniciar, onstart se encargará de detenerlo.
+       ===================================================== */
+
+    if (
+        reconocimientoVozIniciado
+    ) {
+
+        try {
+
+            reconocimientoVozLeccion.stop();
+
+        } catch (error) {
+
+            console.warn(
+                "Error deteniendo reconocimiento:",
+                error
+            );
+        }
+    }
 }
 
 
