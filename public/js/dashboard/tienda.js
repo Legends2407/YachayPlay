@@ -205,19 +205,34 @@ function crearPreviewAvatarTienda() {
         );
 
 
+    const inicial =
+
+        usuario?.nombre
+
+            ? usuario.nombre
+                .trim()
+                .charAt(0)
+                .toUpperCase()
+
+            : "Y";
+
+
     if (!usuario) {
 
         return `
+
             <div class="tienda-avatar-preview">
-                Y
+
+                <span class="tienda-avatar-inicial">
+
+                    ${inicial}
+
+                </span>
+
             </div>
         `;
     }
 
-
-    /* =====================================================
-       FOTO
-       ===================================================== */
 
     const foto =
         obtenerUrlFotoPerfil(
@@ -225,17 +240,21 @@ function crearPreviewAvatarTienda() {
         );
 
 
-    if (foto) {
+    /* =====================================================
+       SIN FOTO
+       ===================================================== */
+
+    if (!foto) {
 
         return `
 
             <div class="tienda-avatar-preview">
 
-                <img
-                    src="${foto}"
-                    alt="Foto de perfil"
-                    class="tienda-avatar-imagen"
-                >
+                <span class="tienda-avatar-inicial">
+
+                    ${inicial}
+
+                </span>
 
             </div>
         `;
@@ -243,27 +262,37 @@ function crearPreviewAvatarTienda() {
 
 
     /* =====================================================
-       INICIAL
+       CON FOTO + FALLBACK A INICIAL
        ===================================================== */
-
-    const inicial =
-        usuario.nombre
-            ? usuario.nombre
-                .trim()
-                .charAt(0)
-                .toUpperCase()
-            : "Y";
-
 
     return `
 
         <div class="tienda-avatar-preview">
 
-            <span class="tienda-avatar-inicial">
+
+            <span
+                class="tienda-avatar-inicial"
+                style="display:none;"
+            >
 
                 ${inicial}
 
             </span>
+
+
+            <img
+                src="${foto}"
+
+                alt="Foto de perfil"
+
+                class="tienda-avatar-imagen"
+
+                onerror="
+                    this.style.display='none';
+                    this.previousElementSibling.style.display='flex';
+                "
+            >
+
 
         </div>
     `;
