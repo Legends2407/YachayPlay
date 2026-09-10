@@ -452,8 +452,14 @@ function cambiarModoOscuro(
 function obtenerUrlFotoPerfil(fotoPerfil) {
 
     if (!fotoPerfil) {
+
         return null;
     }
+
+
+    /* =====================================================
+       FOTO DE GOOGLE / URL EXTERNA
+       ===================================================== */
 
     if (
         fotoPerfil.startsWith("http://") ||
@@ -463,10 +469,18 @@ function obtenerUrlFotoPerfil(fotoPerfil) {
         return fotoPerfil;
     }
 
-    if (fotoPerfil.startsWith("/")) {
+
+    /* =====================================================
+       FOTO SUBIDA A YACHAYPLAY
+       ===================================================== */
+
+    if (
+        fotoPerfil.startsWith("/")
+    ) {
 
         return `${window.location.origin}${fotoPerfil}`;
     }
+
 
     return `${window.location.origin}/${fotoPerfil}`;
 }
@@ -481,6 +495,7 @@ function mostrarPerfil() {
         null
     );
 
+
     cambiarActivo(
         "Perfil"
     );
@@ -492,11 +507,12 @@ function mostrarPerfil() {
         "Mi perfil";
 
 
-    const usuario = JSON.parse(
-        localStorage.getItem(
-            "usuario"
-        )
-    );
+    const usuario =
+        JSON.parse(
+            localStorage.getItem(
+                "usuario"
+            )
+        );
 
 
     if (!usuario) {
@@ -508,6 +524,10 @@ function mostrarPerfil() {
     }
 
 
+    /* =====================================================
+       INICIAL DEL USUARIO
+       ===================================================== */
+
     const inicial =
 
         (
@@ -515,16 +535,16 @@ function mostrarPerfil() {
             "U"
         )
 
+        .trim()
+
         .charAt(0)
 
         .toUpperCase();
 
 
-    const urlFoto =
-        obtenerUrlFotoPerfil(
-            usuario.foto_perfil
-        );
-
+    /* =====================================================
+       MOSTRAR PERFIL
+       ===================================================== */
 
     document.getElementById(
         "contenido"
@@ -548,31 +568,12 @@ function mostrarPerfil() {
                     <img
                         id="perfilFotoImg"
                         class="perfil-avatar-imagen"
-
-                        ${
-                            urlFoto
-                                ? `src="${urlFoto}"`
-                                : ""
-                        }
-
-                        ${
-                            urlFoto
-                                ? ""
-                                : "hidden"
-                        }
-
                         alt="Foto de perfil"
                     >
 
 
                     <span
                         id="perfilFotoInicial"
-
-                        ${
-                            urlFoto
-                                ? "hidden"
-                                : ""
-                        }
                     >
 
                         ${inicial}
@@ -585,12 +586,16 @@ function mostrarPerfil() {
 
                 <button
                     class="btn-foto-flotante"
+
                     onclick="
                         document
                         .getElementById('inputFotoPerfil')
                         .click()
                     "
+
                     title="Cambiar foto"
+
+                    type="button"
                 >
 
                     📷
@@ -601,9 +606,16 @@ function mostrarPerfil() {
             </div>
 
 
+
+            <!-- ==========================================
+                 INFORMACIÓN DEL USUARIO
+                 ========================================== -->
+
             <h1>
+
                 ${usuario.nombre || "Usuario"}
                 ${usuario.apellido || ""}
+
             </h1>
 
 
@@ -615,10 +627,13 @@ function mostrarPerfil() {
 
 
 
-            <!-- INPUT OCULTO -->
+            <!-- ==========================================
+                 INPUT DE FOTO
+                 ========================================== -->
 
             <input
                 type="file"
+
                 id="inputFotoPerfil"
 
                 accept="
@@ -636,13 +651,18 @@ function mostrarPerfil() {
 
 
 
-            <!-- BOTONES DE FOTO -->
+            <!-- ==========================================
+                 ACCIONES DE FOTO
+                 ========================================== -->
 
             <div class="acciones-foto-perfil">
 
 
                 <button
                     class="btn-nivel"
+
+                    type="button"
+
                     onclick="
                         document
                         .getElementById('inputFotoPerfil')
@@ -655,25 +675,21 @@ function mostrarPerfil() {
                 </button>
 
 
-                <button
-                    class="btn-guardar-foto"
-                    id="btnGuardarFotoPerfil"
-                    onclick="guardarFotoPerfil()"
-                    style="display:none;"
-                >
-
-                    💾 Guardar foto
-
-                </button>
-
 
                 <button
                     class="btn-eliminar-foto"
-                    onclick="eliminarFotoPerfil()"
+
+                    type="button"
+
+                    onclick="
+                        eliminarFotoPerfil()
+                    "
 
                     ${
                         usuario.foto_perfil
+
                             ? ""
+
                             : "disabled"
                     }
                 >
@@ -686,8 +702,10 @@ function mostrarPerfil() {
             </div>
 
 
+
             <p
                 id="mensajeFotoPerfil"
+
                 class="mensaje-foto-perfil"
             >
 
@@ -762,6 +780,38 @@ function mostrarPerfil() {
         </div>
     `;
 
+
+    /* =====================================================
+       COLOCAR FOTO O INICIAL
+       ===================================================== */
+
+    const imagenPerfil =
+        document.getElementById(
+            "perfilFotoImg"
+        );
+
+
+    const inicialPerfil =
+        document.getElementById(
+            "perfilFotoInicial"
+        );
+
+
+    colocarFotoOInicial(
+
+        imagenPerfil,
+
+        inicialPerfil,
+
+        usuario
+
+    );
+
+
+    /* =====================================================
+       APLICAR MARCO EQUIPADO
+       ===================================================== */
+
     const avatarGrande =
         document.querySelector(
             ".perfil-avatar-grande"
@@ -776,6 +826,11 @@ function mostrarPerfil() {
 
     );
 
+
+    /* =====================================================
+       ACTUALIZAR TOPBAR
+       ===================================================== */
+
     actualizarTopbarUsuario();
 }
 
@@ -784,7 +839,7 @@ function mostrarPerfil() {
    PREVISUALIZAR FOTO
    ========================================================= */
 
-function previsualizarFotoPerfil(
+async function previsualizarFotoPerfil(
     event
 ) {
 
@@ -880,18 +935,9 @@ function previsualizarFotoPerfil(
     }
 
 
-    const botonGuardar =
-        document.getElementById(
-            "btnGuardarFotoPerfil"
-        );
-
-
-    if (botonGuardar) {
-
-        botonGuardar.style.display =
-            "inline-flex";
-    }
-
+    /* =========================================================
+        MOSTRAR ESTADO
+        ========================================================= */
 
     const mensaje =
         document.getElementById(
@@ -902,8 +948,15 @@ function previsualizarFotoPerfil(
     if (mensaje) {
 
         mensaje.textContent =
-            "Vista previa lista. Presiona Guardar foto para confirmar.";
+            "⏳ Guardando foto...";
     }
+
+
+    /* =========================================================
+        GUARDAR AUTOMÁTICAMENTE
+        ========================================================= */
+
+    await guardarFotoPerfil();
 }
 
 
@@ -930,45 +983,52 @@ async function guardarFotoPerfil() {
     }
 
 
-    const boton =
-        document.getElementById(
-            "btnGuardarFotoPerfil"
-        );
+    /* =====================================================
+       VALIDAR QUE HAYA UNA FOTO SELECCIONADA
+       ===================================================== */
 
+    if (!fotoPerfilSeleccionada) {
 
-    if (boton) {
-
-        boton.disabled =
-            true;
-
-
-        boton.textContent =
-            "Guardando...";
+        return;
     }
 
 
-    const formulario =
-        new FormData();
-
-
-    /*
-    Importante:
-    usuario_id primero y foto después.
-    */
-
-    formulario.append(
-        "usuario_id",
-        usuario.id
-    );
-
-
-    formulario.append(
-        "foto",
-        fotoPerfilSeleccionada
-    );
+    const mensaje =
+        document.getElementById(
+            "mensajeFotoPerfil"
+        );
 
 
     try {
+
+        /* =================================================
+           MOSTRAR ESTADO
+           ================================================= */
+
+        if (mensaje) {
+
+            mensaje.textContent =
+                "⏳ Guardando foto...";
+        }
+
+
+        /* =================================================
+           PREPARAR ARCHIVO
+           ================================================= */
+
+        const formData =
+            new FormData();
+
+
+        formData.append(
+            "foto",
+            fotoPerfilSeleccionada
+        );
+
+
+        /* =================================================
+           ENVIAR AL SERVIDOR
+           ================================================= */
 
         const respuesta =
             await fetch(
@@ -976,12 +1036,18 @@ async function guardarFotoPerfil() {
                 `${API_DASHBOARD}/perfil/foto`,
 
                 {
+
                     method:
                         "POST",
 
+                    credentials:
+                        "include",
+
                     body:
-                        formulario
+                        formData
+
                 }
+
             );
 
 
@@ -989,18 +1055,24 @@ async function guardarFotoPerfil() {
             await respuesta.json();
 
 
+        /* =================================================
+           VALIDAR RESPUESTA
+           ================================================= */
+
         if (!respuesta.ok) {
 
             throw new Error(
+
                 data.mensaje ||
                 "No se pudo guardar la foto"
+
             );
         }
 
 
-        /* ===============================================
-           ACTUALIZAR SESIÓN LOCAL
-           =============================================== */
+        /* =================================================
+           ACTUALIZAR USUARIO LOCAL
+           ================================================= */
 
         localStorage.setItem(
 
@@ -1013,25 +1085,94 @@ async function guardarFotoPerfil() {
         );
 
 
+        /* =================================================
+           LIMPIAR FOTO TEMPORAL
+           ================================================= */
+
         fotoPerfilSeleccionada =
             null;
 
 
-        if (urlPreviewFotoPerfil) {
+        /* =================================================
+           ACTUALIZAR FOTO DEL PERFIL
+           ================================================= */
 
-            URL.revokeObjectURL(
-                urlPreviewFotoPerfil
+        const imagenPerfil =
+            document.getElementById(
+                "perfilFotoImg"
             );
 
 
-            urlPreviewFotoPerfil =
-                null;
+        const inicialPerfil =
+            document.getElementById(
+                "perfilFotoInicial"
+            );
+
+
+        colocarFotoOInicial(
+
+            imagenPerfil,
+
+            inicialPerfil,
+
+            data.usuario
+
+        );
+
+
+        /* =================================================
+           HABILITAR BOTÓN ELIMINAR
+           ================================================= */
+
+        const botonEliminar =
+            document.querySelector(
+                ".btn-eliminar-foto"
+            );
+
+
+        if (botonEliminar) {
+
+            botonEliminar.disabled =
+                false;
         }
 
 
+        /* =================================================
+           ACTUALIZAR TOPBAR
+           ================================================= */
+
         actualizarTopbarUsuario();
 
-        mostrarPerfil();
+
+        /* =================================================
+           MENSAJE DE ÉXITO
+           ================================================= */
+
+        if (mensaje) {
+
+            mensaje.textContent =
+                "✅ Foto de perfil actualizada correctamente.";
+        }
+
+
+        /* =================================================
+           LIMPIAR INPUT
+
+           Permite seleccionar nuevamente la misma foto.
+           ================================================= */
+
+        const input =
+            document.getElementById(
+                "inputFotoPerfil"
+            );
+
+
+        if (input) {
+
+            input.value =
+                "";
+        }
+
 
     } catch (error) {
 
@@ -1040,14 +1181,11 @@ async function guardarFotoPerfil() {
             error
         );
 
-        if (boton) {
 
-            boton.disabled =
-                false;
+        if (mensaje) {
 
-
-            boton.textContent =
-                "💾 Guardar foto";
+            mensaje.textContent =
+                `❌ ${error.message}`;
         }
     }
 }
